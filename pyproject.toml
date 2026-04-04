@@ -10,9 +10,15 @@ readme = "README.md"
 requires-python = ">=3.9"
 dependencies = []
 
+[project.scripts]
+harmonies-play = "harmonies.ui.app:main"
+
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
+
+[tool.setuptools.package-data]
+harmonies = ["data/*.json"]

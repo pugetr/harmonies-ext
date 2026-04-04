@@ -1,11 +1,11 @@
-from harmonies.board import PlayerBoard
+from harmonies.board import PlayerBoard, create_player_board
 from harmonies.cards import AnimalCardDefinition, AnimalCardState, HabitatPattern, StackRequirement
-from harmonies.model import BoardSide, Coordinate, TerrainColor, make_hexagon
+from harmonies.model import BoardSide, Coordinate, TerrainColor
 from harmonies.scoring import score_breakdown, score_buildings, score_fields, score_mountains, score_rivers, score_trees, score_water
 
 
 def board(side: BoardSide = BoardSide.A) -> PlayerBoard:
-    return PlayerBoard(side=side, spaces=make_hexagon(3))
+    return create_player_board(side)
 
 
 def test_tree_scoring_uses_1_3_7_values() -> None:

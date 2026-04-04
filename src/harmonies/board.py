@@ -3,11 +3,18 @@ from __future__ import annotations
 from dataclasses import dataclass, field, replace
 from typing import Optional
 
-from harmonies.model import BoardSide, Coordinate, TerrainColor
+from harmonies.model import BoardSide, Coordinate, TerrainColor, make_hexagon
 
 
 TREE_SCORES = {1: 1, 2: 3, 3: 7}
 MOUNTAIN_SCORES = {1: 1, 2: 3, 3: 7}
+
+
+OFFICIAL_BOARD_SPACES: frozenset[Coordinate] = make_hexagon(3)
+OFFICIAL_BOARD_LAYOUTS: dict[BoardSide, frozenset[Coordinate]] = {
+    BoardSide.A: OFFICIAL_BOARD_SPACES,
+    BoardSide.B: OFFICIAL_BOARD_SPACES,
+}
 
 
 @dataclass(frozen=True)
@@ -121,3 +128,14 @@ class PlayerBoard:
     def _assert_space(self, coordinate: Coordinate) -> None:
         if coordinate not in self.spaces:
             raise ValueError(f"coordinate {coordinate} is outside the board layout")
+
+
+def board_spaces_for_side(side: BoardSide) -> frozenset[Coordinate]:
+    try:
+        return OFFICIAL_BOARD_LAYOUTS[side]
+    except KeyError as error:
+        raise ValueError(f"unsupported board side: {side}") from error
+
+
+def create_player_board(side: BoardSide) -> PlayerBoard:
+    return PlayerBoard(side=side, spaces=board_spaces_for_side(side))

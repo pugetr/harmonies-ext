@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 from typing import Optional
 
-from harmonies.board import PlayerBoard
+from harmonies.board import create_player_board
 from harmonies.cards import AnimalCardDefinition, AnimalCardState, resolve_habitat_target
 from harmonies.model import BoardSide, Coordinate, TerrainColor
 from harmonies.scoring import ScoreBreakdown, score_breakdown
@@ -56,7 +56,6 @@ class GameRules:
     def create_game(
         player_count: int,
         board_side: BoardSide,
-        board_spaces: frozenset[Coordinate],
         bag: tuple[TerrainColor, ...],
         animal_deck: tuple[AnimalCardDefinition, ...],
         start_player: int = 0,
@@ -74,7 +73,7 @@ class GameRules:
 
         animal_row, animal_deck = animal_deck[:5], animal_deck[5:]
         players = tuple(
-            PlayerState(board=PlayerBoard(side=board_side, spaces=board_spaces))
+            PlayerState(board=create_player_board(board_side))
             for _ in range(player_count)
         )
         turns_taken = tuple(0 for _ in range(player_count))

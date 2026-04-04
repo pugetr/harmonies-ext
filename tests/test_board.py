@@ -1,9 +1,18 @@
-from harmonies.board import PlayerBoard
-from harmonies.model import BoardSide, Coordinate, TerrainColor, make_hexagon
+from harmonies.board import PlayerBoard, create_player_board
+from harmonies.model import BoardSide, Coordinate, TerrainColor
 
 
 def build_board() -> PlayerBoard:
-    return PlayerBoard(side=BoardSide.A, spaces=make_hexagon(2))
+    return create_player_board(BoardSide.A)
+
+
+def test_official_board_factory_uses_official_layout() -> None:
+    board = create_player_board(BoardSide.B)
+
+    assert board.side == BoardSide.B
+    assert len(board.spaces) == 37
+    assert Coordinate(3, 0) in board.spaces
+    assert Coordinate(4, 0) not in board.spaces
 
 
 def test_green_can_be_placed_on_empty_or_wood_stacks() -> None:

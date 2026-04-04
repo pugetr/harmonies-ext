@@ -1,6 +1,6 @@
 from harmonies.cards import AnimalCardDefinition, HabitatPattern, StackRequirement
 from harmonies.game import GameRules
-from harmonies.model import BoardSide, Coordinate, TerrainColor, make_hexagon
+from harmonies.model import BoardSide, Coordinate, TerrainColor
 
 
 def simple_card(card_id: str = "meerkat") -> AnimalCardDefinition:
@@ -52,7 +52,6 @@ def build_state():
     return GameRules.create_game(
         player_count=2,
         board_side=BoardSide.A,
-        board_spaces=make_hexagon(3),
         bag=bag,
         animal_deck=cards,
     )
@@ -119,7 +118,6 @@ def test_endgame_triggers_final_round_when_bag_cannot_refill_offer() -> None:
     state = GameRules.create_game(
         player_count=2,
         board_side=BoardSide.A,
-        board_spaces=make_hexagon(2),
         bag=bag,
         animal_deck=cards,
     )

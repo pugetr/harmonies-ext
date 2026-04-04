@@ -1,0 +1,2 @@
+[console_scripts]
+harmonies-play = harmonies.ui.app:main

@@ -1,6 +1,10 @@
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
+from importlib.resources import files
+from pathlib import Path
+from typing import Optional
 
 from harmonies.board import PlayerBoard
 from harmonies.model import Coordinate, TerrainColor, rotate_clockwise
@@ -70,6 +74,56 @@ class AnimalCardState:
 
     def score(self) -> int:
         return self.definition.score_for(self.cubes_placed)
+
+
+def load_base_animal_deck(path: Optional[str] = None) -> tuple[AnimalCardDefinition, ...]:
+    if path is None:
+        payload_path = files("harmonies").joinpath("data/base_animals.json")
+        with payload_path.open("r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+    else:
+        with Path(path).open("r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+
+    cards = tuple(_parse_card_definition(card_data) for card_data in payload["cards"])
+    if not cards:
+        raise ValueError("base animal deck data must contain at least one card")
+    return cards
+
+
+def _parse_card_definition(card_data: dict) -> AnimalCardDefinition:
+    shown_scores = tuple(card_data["scores"])
+    if not shown_scores:
+        raise ValueError("animal cards must define at least one score")
+
+    target_offset = _parse_coordinate(card_data["target"])
+    requirements = {
+        _parse_coordinate(requirement_data["offset"]): _parse_stack_requirement(requirement_data)
+        for requirement_data in card_data["requirements"]
+    }
+
+    return AnimalCardDefinition(
+        card_id=card_data["card_id"],
+        name=card_data["name"],
+        habitat=HabitatPattern(requirements=requirements, target_offset=target_offset),
+        points_by_cubes_placed=(0, *shown_scores),
+    )
+
+
+def _parse_coordinate(values: list[int]) -> Coordinate:
+    if len(values) != 2:
+        raise ValueError("coordinates must contain exactly two integers")
+    return Coordinate(values[0], values[1])
+
+
+def _parse_stack_requirement(requirement_data: dict) -> StackRequirement:
+    return StackRequirement(
+        top=TerrainColor(requirement_data["top"]),
+        height=requirement_data["height"],
+        building_base_allowed=tuple(
+            TerrainColor(color) for color in requirement_data.get("building_base_allowed", ())
+        ),
+    )
 
 
 def resolve_habitat_target(

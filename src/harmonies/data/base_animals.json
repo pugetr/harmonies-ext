@@ -1,0 +1,430 @@
+{
+  "cards": [
+    {
+      "card_id": "base-card-01",
+      "name": "Base Card 01",
+      "source_image": "Screenshot 2026-04-04 at 08.49.01.png",
+      "scores": [16, 10, 5],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "water", "height": 1},
+        {"offset": [-1, 1], "top": "leaf", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-02",
+      "name": "Base Card 02",
+      "source_image": "Screenshot 2026-04-04 at 08.49.04.png",
+      "scores": [15, 10, 6, 4, 2],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "water", "height": 1},
+        {"offset": [-1, 1], "top": "leaf", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-03",
+      "name": "Base Card 03",
+      "source_image": "Screenshot 2026-04-04 at 08.49.09.png",
+      "scores": [13, 8, 4, 2],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "water", "height": 1},
+        {
+          "offset": [-1, 1],
+          "top": "building",
+          "height": 2,
+          "building_base_allowed": ["mountain", "wood", "building"]
+        }
+      ]
+    },
+    {
+      "card_id": "base-card-04",
+      "name": "Base Card 04",
+      "source_image": "Screenshot 2026-04-04 at 08.49.13.png",
+      "scores": [15, 9, 4],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "water", "height": 1},
+        {"offset": [-1, 1], "top": "water", "height": 1},
+        {"offset": [-2, 2], "top": "leaf", "height": 3}
+      ]
+    },
+    {
+      "card_id": "base-card-05",
+      "name": "Base Card 05",
+      "source_image": "Screenshot 2026-04-04 at 08.49.16.png",
+      "scores": [16, 10, 4],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "water", "height": 1},
+        {"offset": [-1, 1], "top": "mountain", "height": 1},
+        {"offset": [0, 1], "top": "mountain", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-06",
+      "name": "Base Card 06",
+      "source_image": "Screenshot 2026-04-04 at 08.49.33.png",
+      "scores": [15, 10, 6, 3],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "water", "height": 1},
+        {"offset": [-1, 1], "top": "mountain", "height": 3}
+      ]
+    },
+    {
+      "card_id": "base-card-07",
+      "name": "Base Card 07",
+      "source_image": "Screenshot 2026-04-04 at 08.49.56.png",
+      "scores": [16, 10, 5],
+      "target": [0, 0],
+      "requirements": [
+        {
+          "offset": [0, 0],
+          "top": "building",
+          "height": 2,
+          "building_base_allowed": ["mountain", "wood", "building"]
+        },
+        {"offset": [-1, 1], "top": "field", "height": 1},
+        {"offset": [-2, 2], "top": "field", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-08",
+      "name": "Base Card 08",
+      "source_image": "Screenshot 2026-04-04 at 08.50.07.png",
+      "scores": [17, 10, 5],
+      "target": [0, 0],
+      "requirements": [
+        {
+          "offset": [0, 0],
+          "top": "building",
+          "height": 2,
+          "building_base_allowed": ["mountain", "wood", "building"]
+        },
+        {"offset": [1, -1], "top": "water", "height": 1},
+        {"offset": [1, 0], "top": "water", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-09",
+      "name": "Base Card 09",
+      "source_image": "Screenshot 2026-04-04 at 08.50.13.png",
+      "scores": [12, 5],
+      "target": [0, 0],
+      "requirements": [
+        {
+          "offset": [0, 0],
+          "top": "building",
+          "height": 2,
+          "building_base_allowed": ["mountain", "wood", "building"]
+        },
+        {"offset": [-1, 1], "top": "leaf", "height": 2},
+        {"offset": [0, 1], "top": "leaf", "height": 2}
+      ]
+    },
+    {
+      "card_id": "base-card-10",
+      "name": "Base Card 10",
+      "source_image": "Screenshot 2026-04-04 at 08.50.18.png",
+      "scores": [17, 10, 5],
+      "target": [0, 0],
+      "requirements": [
+        {
+          "offset": [0, 0],
+          "top": "building",
+          "height": 2,
+          "building_base_allowed": ["mountain", "wood", "building"]
+        },
+        {"offset": [1, -1], "top": "field", "height": 1},
+        {"offset": [1, 0], "top": "field", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-11",
+      "name": "Base Card 11",
+      "source_image": "Screenshot 2026-04-04 at 08.50.31.png",
+      "scores": [16, 10, 4],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "water", "height": 1},
+        {"offset": [-1, 1], "top": "field", "height": 1},
+        {"offset": [0, 1], "top": "field", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-12",
+      "name": "Base Card 12",
+      "source_image": "Screenshot 2026-04-04 at 08.50.38.png",
+      "scores": [15, 9, 4],
+      "target": [0, 0],
+      "requirements": [
+        {
+          "offset": [0, 0],
+          "top": "building",
+          "height": 2,
+          "building_base_allowed": ["mountain", "wood", "building"]
+        },
+        {"offset": [-1, 1], "top": "leaf", "height": 3}
+      ]
+    },
+    {
+      "card_id": "base-card-13",
+      "name": "Base Card 13",
+      "source_image": "Screenshot 2026-04-04 at 08.50.47.png",
+      "scores": [16, 10, 4],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "mountain", "height": 1},
+        {"offset": [1, -1], "top": "water", "height": 1},
+        {"offset": [1, 0], "top": "water", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-14",
+      "name": "Base Card 14",
+      "source_image": "Screenshot 2026-04-04 at 08.50.59.png",
+      "scores": [16, 9, 4],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "mountain", "height": 1},
+        {"offset": [-1, 1], "top": "water", "height": 1},
+        {"offset": [-2, 2], "top": "field", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-15",
+      "name": "Base Card 15",
+      "source_image": "Screenshot 2026-04-04 at 08.51.03.png",
+      "scores": [11, 5],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "mountain", "height": 1},
+        {"offset": [-1, 1], "top": "water", "height": 1},
+        {"offset": [0, 1], "top": "water", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-16",
+      "name": "Base Card 16",
+      "source_image": "Screenshot 2026-04-04 at 08.51.07.png",
+      "scores": [18, 11, 5],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "leaf", "height": 3},
+        {"offset": [1, -1], "top": "water", "height": 1},
+        {"offset": [1, 0], "top": "water", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-17",
+      "name": "Base Card 17",
+      "source_image": "Screenshot 2026-04-04 at 08.51.12.png",
+      "scores": [15, 10, 6, 3],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "mountain", "height": 1},
+        {"offset": [-1, 1], "top": "leaf", "height": 3}
+      ]
+    },
+    {
+      "card_id": "base-card-18",
+      "name": "Base Card 18",
+      "source_image": "Screenshot 2026-04-04 at 08.51.17.png",
+      "scores": [17, 12, 8, 5, 2],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "field", "height": 1},
+        {"offset": [-1, 1], "top": "leaf", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-19",
+      "name": "Base Card 19",
+      "source_image": "Screenshot 2026-04-04 at 08.51.21.png",
+      "scores": [11, 5],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "mountain", "height": 3},
+        {"offset": [-1, 1], "top": "water", "height": 1},
+        {"offset": [0, 1], "top": "water", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-20",
+      "name": "Base Card 20",
+      "source_image": "Screenshot 2026-04-04 at 08.51.25.png",
+      "scores": [18, 11, 5],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "leaf", "height": 3},
+        {"offset": [1, -1], "top": "water", "height": 1},
+        {"offset": [1, 0], "top": "water", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-21",
+      "name": "Base Card 21",
+      "source_image": "Screenshot 2026-04-04 at 08.51.27.png",
+      "scores": [12, 5],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "field", "height": 1},
+        {"offset": [-1, 1], "top": "field", "height": 1},
+        {"offset": [-2, 2], "top": "mountain", "height": 2}
+      ]
+    },
+    {
+      "card_id": "base-card-22",
+      "name": "Base Card 22",
+      "source_image": "Screenshot 2026-04-04 at 08.51.31.png",
+      "scores": [9, 4],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "field", "height": 1},
+        {
+          "offset": [1, -1],
+          "top": "building",
+          "height": 2,
+          "building_base_allowed": ["mountain", "wood", "building"]
+        },
+        {
+          "offset": [1, 0],
+          "top": "building",
+          "height": 2,
+          "building_base_allowed": ["mountain", "wood", "building"]
+        }
+      ]
+    },
+    {
+      "card_id": "base-card-23",
+      "name": "Base Card 23",
+      "source_image": "Screenshot 2026-04-04 at 08.51.33.png",
+      "scores": [17, 10, 5],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "field", "height": 1},
+        {"offset": [1, -1], "top": "leaf", "height": 2},
+        {"offset": [1, 0], "top": "leaf", "height": 2}
+      ]
+    },
+    {
+      "card_id": "base-card-24",
+      "name": "Base Card 24",
+      "source_image": "Screenshot 2026-04-04 at 08.51.36.png",
+      "scores": [14, 9, 5, 2],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "mountain", "height": 1},
+        {"offset": [-1, 1], "top": "field", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-25",
+      "name": "Base Card 25",
+      "source_image": "Screenshot 2026-04-04 at 08.51.39.png",
+      "scores": [15, 10, 6, 3],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "leaf", "height": 2},
+        {"offset": [-1, 1], "top": "leaf", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-26",
+      "name": "Base Card 26",
+      "source_image": "Screenshot 2026-04-04 at 08.51.43.png",
+      "scores": [17, 10, 5],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "leaf", "height": 1},
+        {"offset": [-1, 1], "top": "leaf", "height": 1},
+        {
+          "offset": [-2, 2],
+          "top": "building",
+          "height": 2,
+          "building_base_allowed": ["mountain", "wood", "building"]
+        }
+      ]
+    },
+    {
+      "card_id": "base-card-27",
+      "name": "Base Card 27",
+      "source_image": "Screenshot 2026-04-04 at 08.51.48.png",
+      "scores": [11, 5],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "leaf", "height": 1},
+        {"offset": [-1, 1], "top": "mountain", "height": 2},
+        {"offset": [0, 1], "top": "mountain", "height": 2}
+      ]
+    },
+    {
+      "card_id": "base-card-28",
+      "name": "Base Card 28",
+      "source_image": "Screenshot 2026-04-04 at 08.51.57.png",
+      "scores": [18, 8],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "leaf", "height": 2},
+        {"offset": [1, -1], "top": "field", "height": 1},
+        {"offset": [1, 0], "top": "field", "height": 1},
+        {"offset": [0, 1], "top": "field", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-29",
+      "name": "Base Card 29",
+      "source_image": "Screenshot 2026-04-04 at 08.52.01.png",
+      "scores": [14, 9, 4],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "leaf", "height": 2},
+        {"offset": [1, -1], "top": "water", "height": 1},
+        {"offset": [1, 0], "top": "water", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-30",
+      "name": "Base Card 30",
+      "source_image": "Screenshot 2026-04-04 at 08.52.04.png",
+      "scores": [13, 8, 4],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "leaf", "height": 2},
+        {
+          "offset": [-1, 1],
+          "top": "building",
+          "height": 2,
+          "building_base_allowed": ["mountain", "wood", "building"]
+        }
+      ]
+    },
+    {
+      "card_id": "base-card-31",
+      "name": "Base Card 31",
+      "source_image": "Screenshot 2026-04-04 at 08.52.12.png",
+      "scores": [11, 5],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "field", "height": 1},
+        {"offset": [-1, 1], "top": "leaf", "height": 2},
+        {"offset": [-2, 2], "top": "leaf", "height": 2}
+      ]
+    },
+    {
+      "card_id": "base-card-32",
+      "name": "Base Card 32",
+      "source_image": "Screenshot 2026-04-04 at 08.52.15.png",
+      "scores": [12, 6],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "field", "height": 1},
+        {"offset": [1, -1], "top": "water", "height": 1},
+        {"offset": [1, 0], "top": "water", "height": 1},
+        {"offset": [0, 1], "top": "water", "height": 1}
+      ]
+    }
+  ]
+}

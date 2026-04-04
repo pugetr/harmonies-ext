@@ -1,3 +1,12 @@
+Metadata-Version: 2.4
+Name: harmonies
+Version: 0.1.0
+Summary: Core rules engine for the board game Harmonies
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+
 # harmonies-ext
 
 This repo is for implementing the board game Harmonies, then extending it with new cards, terrains, and other variants.
