@@ -1,135 +1,165 @@
 from __future__ import annotations
 
+import random
+
+from rich.text import Text
+from textual.app import App, ComposeResult
+from textual.binding import Binding
+from textual.containers import Horizontal, VerticalScroll
+from textual.widgets import Footer, Header, Static
+
 from harmonies.cards import load_base_animal_deck
 from harmonies.game import GameRules, build_bag
-from harmonies.model import BoardSide, Coordinate
+from harmonies.model import BoardSide
 from harmonies.ui.controller import GameController
-from harmonies.ui.layout import build_board_layout
-from harmonies.ui.render import render_board, render_game_summary
-
-
-HELP_TEXT = """Commands:
-  help
-  draft <offer_index>
-  place <q>,<r>
-  take <row_index>
-  cube <card_index> <q>,<r> [rotation]
-  end
-  quit
-"""
+from harmonies.ui.session import GameSession
 
 
 def build_default_controller() -> GameController:
     state = GameRules.create_game(
         player_count=2,
         board_side=BoardSide.A,
-        bag=build_bag(),
+        bag=build_bag(rng=random.Random()),
         animal_deck=load_base_animal_deck(),
     )
     return GameController(state)
 
 
-def parse_coordinate(raw_value: str) -> Coordinate:
-    pieces = [part.strip() for part in raw_value.split(",")]
-    if len(pieces) != 2:
-        raise ValueError("coordinates must use q,r format")
-    return Coordinate(q=int(pieces[0]), r=int(pieces[1]))
-
-
 def render_screen(controller: GameController) -> str:
-    layout = build_board_layout(controller.current_player.board)
-    lines = [render_game_summary(controller.state)]
-    lines.append("")
-    lines.append(render_offers(controller))
-    lines.append(render_animal_row(controller))
-    lines.append(render_active_cards(controller))
-    lines.append("")
-    lines.append(render_board(controller.state, layout, player_index=controller.current_player_index))
-    return "\n".join(lines)
+    return GameSession(controller).render_screen()
 
 
-def render_offers(controller: GameController) -> str:
-    offers = []
-    for index, offer in enumerate(controller.state.offers):
-        terrain_names = ", ".join(color.value for color in offer) if offer else "taken"
-        offers.append(f"  {index}: {terrain_names}")
-    return "Offers:\n" + "\n".join(offers)
+class HarmoniesTerminalApp(App[None]):
+    TITLE = "Harmonies"
+    SUB_TITLE = "Persistent full-screen terminal play"
+    CSS = """
+    Screen {
+        layout: vertical;
+    }
 
+    #body {
+        layout: horizontal;
+        height: 1fr;
+    }
 
-def render_animal_row(controller: GameController) -> str:
-    cards = []
-    for index, card in enumerate(controller.state.animal_row):
-        cards.append(f"  {index}: {card.name} ({card.card_id})")
-    if not cards:
-        cards.append("  none")
-    return "Animal Row:\n" + "\n".join(cards)
+    #board-pane {
+        width: 1fr;
+        border: round $accent;
+        padding: 1 2;
+        margin: 0 1 0 0;
+    }
 
+    #sidebar {
+        width: 42;
+        border: round $surface;
+        padding: 0 1;
+    }
 
-def render_active_cards(controller: GameController) -> str:
-    cards = []
-    for index, card in enumerate(controller.current_player.active_cards):
-        cards.append(
-            f"  {index}: {card.definition.name} cubes {card.cubes_placed}/{card.definition.cube_count}"
-        )
-    if not cards:
-        cards.append("  none")
-    return "Active Cards:\n" + "\n".join(cards)
+    .panel {
+        border: round $panel;
+        padding: 1 2;
+        margin: 0 0 1 0;
+    }
+    """
+    BINDINGS = [
+        Binding("left,h", "move_left", "Left", show=False),
+        Binding("right,l", "move_right", "Right", show=False),
+        Binding("up,k", "move_up", "Up", show=False),
+        Binding("down,j", "move_down", "Down", show=False),
+        Binding("o", "cycle_offer", "Offer"),
+        Binding("n", "cycle_animal", "Animal"),
+        Binding("c", "cycle_card", "Card"),
+        Binding("r", "rotate", "Rotate"),
+        Binding("d", "draft", "Draft"),
+        Binding("t", "take_card", "Take"),
+        Binding("enter,space,p", "place", "Place"),
+        Binding("e", "end_turn", "End"),
+        Binding("q", "quit", "Quit"),
+    ]
 
+    def __init__(self, controller: GameController | None = None) -> None:
+        super().__init__()
+        self.session = GameSession(controller or build_default_controller())
 
-def handle_command(controller: GameController, raw_command: str) -> str:
-    command = raw_command.strip()
-    if not command:
-        return "enter a command"
-    if command == "help":
-        return HELP_TEXT.rstrip()
-    if command == "quit":
-        raise EOFError()
+    def compose(self) -> ComposeResult:
+        yield Header()
+        with Horizontal(id="body"):
+            yield Static(id="board-pane")
+            with VerticalScroll(id="sidebar"):
+                yield Static(id="summary-pane", classes="panel")
+                yield Static(id="offers-pane", classes="panel")
+                yield Static(id="animal-pane", classes="panel")
+                yield Static(id="cards-pane", classes="panel")
+                yield Static(id="cursor-pane", classes="panel")
+                yield Static(id="message-pane", classes="panel")
+                yield Static(id="controls-pane", classes="panel")
+        yield Footer()
 
-    parts = command.split()
-    action = parts[0]
+    def on_mount(self) -> None:
+        self.refresh_view()
 
-    try:
-        if action == "draft" and len(parts) == 2:
-            error = controller.draft_offer(int(parts[1]))
-            return error or "offer drafted"
-        if action == "place" and len(parts) == 2:
-            error = controller.place_next_token(parse_coordinate(parts[1]))
-            return error or "token placed"
-        if action == "take" and len(parts) == 2:
-            error = controller.take_animal_card(int(parts[1]))
-            return error or "animal card taken"
-        if action == "cube" and len(parts) in {3, 4}:
-            rotation = int(parts[3]) if len(parts) == 4 else 0
-            error = controller.place_animal_cube(
-                int(parts[1]),
-                parse_coordinate(parts[2]),
-                rotation,
-            )
-            return error or "animal cube placed"
-        if action == "end" and len(parts) == 1:
-            error = controller.end_turn()
-            return error or "turn ended"
-    except ValueError as error:
-        return str(error)
+    def refresh_view(self) -> None:
+        self.query_one("#board-pane", Static).update(Text.from_markup(self.session.render_board_panel_markup()))
+        self.query_one("#summary-pane", Static).update(Text.from_markup(self.session.render_summary_panel_markup()))
+        self.query_one("#offers-pane", Static).update(Text.from_markup(self.session.render_offers_panel_markup()))
+        self.query_one("#animal-pane", Static).update(Text(self.session.render_animal_row_panel()))
+        self.query_one("#cards-pane", Static).update(Text(self.session.render_active_cards_panel()))
+        self.query_one("#cursor-pane", Static).update(Text(self.session.render_cursor_panel()))
+        self.query_one("#message-pane", Static).update(Text(self.session.render_message_panel()))
+        self.query_one("#controls-pane", Static).update(Text(self.session.render_controls_panel()))
 
-    return "unknown command; type 'help'"
+    def action_move_left(self) -> None:
+        self.session.move_cursor("left")
+        self.refresh_view()
+
+    def action_move_right(self) -> None:
+        self.session.move_cursor("right")
+        self.refresh_view()
+
+    def action_move_up(self) -> None:
+        self.session.move_cursor("up")
+        self.refresh_view()
+
+    def action_move_down(self) -> None:
+        self.session.move_cursor("down")
+        self.refresh_view()
+
+    def action_cycle_offer(self) -> None:
+        self.session.cycle_offer()
+        self.refresh_view()
+
+    def action_cycle_animal(self) -> None:
+        self.session.cycle_animal_row()
+        self.refresh_view()
+
+    def action_cycle_card(self) -> None:
+        self.session.cycle_active_card()
+        self.refresh_view()
+
+    def action_rotate(self) -> None:
+        self.session.rotate_preview()
+        self.refresh_view()
+
+    def action_draft(self) -> None:
+        self.session.draft_selected_offer()
+        self.refresh_view()
+
+    def action_take_card(self) -> None:
+        self.session.take_selected_animal_card()
+        self.refresh_view()
+
+    def action_place(self) -> None:
+        self.session.place_at_cursor()
+        self.refresh_view()
+
+    def action_end_turn(self) -> None:
+        self.session.end_turn()
+        self.refresh_view()
 
 
 def main() -> int:
-    controller = build_default_controller()
-    message = HELP_TEXT.rstrip()
-
-    try:
-        while True:
-            print(render_screen(controller))
-            print()
-            print(message)
-            raw_command = input("> ")
-            message = handle_command(controller, raw_command)
-            print()
-    except EOFError:
-        print("session ended")
-        return 0
+    HarmoniesTerminalApp().run()
+    return 0
 
 
 if __name__ == "__main__":

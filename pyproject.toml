@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Core rules engine for the board game Harmonies"
 readme = "README.md"
 requires-python = ">=3.9"
-dependencies = []
+dependencies = ["textual>=0.58"]
 
 [project.scripts]
 harmonies-play = "harmonies.ui.app:main"

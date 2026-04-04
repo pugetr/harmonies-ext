@@ -1,5 +1,7 @@
+from random import Random
+
 from harmonies.cards import AnimalCardDefinition, HabitatPattern, StackRequirement
-from harmonies.game import GameRules
+from harmonies.game import GameRules, build_bag
 from harmonies.model import BoardSide, Coordinate, TerrainColor
 
 
@@ -138,3 +140,27 @@ def test_endgame_triggers_final_round_when_bag_cannot_refill_offer() -> None:
     state = GameRules.end_turn(state)
 
     assert state.game_over is True
+
+
+def test_build_bag_can_shuffle_with_supplied_rng() -> None:
+    bag = build_bag(
+        counts={
+            TerrainColor.WATER: 2,
+            TerrainColor.MOUNTAIN: 1,
+            TerrainColor.WOOD: 1,
+            TerrainColor.LEAF: 1,
+            TerrainColor.FIELD: 1,
+            TerrainColor.BUILDING: 1,
+        },
+        rng=Random(7),
+    )
+
+    assert bag == (
+        TerrainColor.FIELD,
+        TerrainColor.BUILDING,
+        TerrainColor.LEAF,
+        TerrainColor.WATER,
+        TerrainColor.WOOD,
+        TerrainColor.WATER,
+        TerrainColor.MOUNTAIN,
+    )

@@ -1,8 +1,12 @@
+import asyncio
+
 from harmonies.cards import AnimalCardDefinition, HabitatPattern, StackRequirement
 from harmonies.game import GameRules
 from harmonies.model import BoardSide, Coordinate, TerrainColor
 from harmonies.ui import GameController, build_board_layout, render_board, render_game_summary
-from harmonies.ui.app import handle_command, parse_coordinate, render_screen
+from harmonies.ui.app import HarmoniesTerminalApp, render_screen
+from harmonies.ui.session import GameSession, format_coordinate
+from harmonies.ui.render import render_board_markup
 
 
 def simple_card(card_id: str = "meerkat") -> AnimalCardDefinition:
@@ -142,21 +146,114 @@ def test_renderer_shows_cursor_highlight_and_summary() -> None:
     assert "Pending tokens: field, wood" in summary_text
 
 
-def test_parse_coordinate_requires_q_r_format() -> None:
-    coordinate = parse_coordinate("1, -2")
+def test_markup_board_keeps_terrain_visible_under_cursor() -> None:
+    state = build_state()
+    state = GameRules.draft_offer(state, 0)
+    state = GameRules.place_next_token(state, Coordinate(0, 0))
 
-    assert coordinate == Coordinate(1, -2)
+    layout = build_board_layout(state.players[0].board)
+    board_markup = render_board_markup(
+        state,
+        layout,
+        player_index=0,
+        cursor=Coordinate(0, 0),
+    )
+
+    assert "Mt" in board_markup
+    assert "underline" in board_markup
 
 
-def test_terminal_shell_command_flow_and_screen_render() -> None:
+def test_session_places_tokens_and_reports_board_state() -> None:
+    session = GameSession(GameController(build_state()))
+
+    session.draft_selected_offer()
+
+    assert session.phase == "place_tokens"
+    assert Coordinate(0, 0) in session.board_highlights()
+
+    session.place_at_cursor()
+
+    assert format_coordinate(session.cursor) in session.message
+    assert session.current_player.board.cell(Coordinate(0, 0)).top_color == TerrainColor.MOUNTAIN
+
+
+def test_session_vertical_navigation_stays_in_two_columns() -> None:
+    session = GameSession(GameController(build_state()))
+
+    visited_columns = [session.layout.position_for(session.cursor).column]
+
+    session.move_cursor("up")
+    visited_columns.append(session.layout.position_for(session.cursor).column)
+    session.move_cursor("up")
+    visited_columns.append(session.layout.position_for(session.cursor).column)
+    session.move_cursor("up")
+    visited_columns.append(session.layout.position_for(session.cursor).column)
+
+    assert len(set(visited_columns)) == 2
+    assert session.cursor == Coordinate(1, -3)
+
+    session.move_cursor("down")
+    session.move_cursor("down")
+    session.move_cursor("down")
+
+    assert session.cursor == Coordinate(0, 0)
+
+
+def test_session_previews_and_places_animal_cube() -> None:
     controller = GameController(build_state())
+    controller.draft_offer(0)
+    controller.place_next_token(Coordinate(0, 0))
+    controller.take_animal_card(0)
+    controller.place_next_token(Coordinate(1, 0))
+    controller.place_next_token(Coordinate(2, 0))
+    session = GameSession(controller)
 
-    assert handle_command(controller, "draft 0") == "offer drafted"
-    assert handle_command(controller, "place 0,0") == "token placed"
+    preview = session.current_preview()
 
+    assert preview is not None
+    assert preview.target == Coordinate(0, 0)
+
+    session.place_at_cursor()
+
+    assert session.current_player.board.cell(Coordinate(0, 0)).cube_marker == "card-0:1"
+    assert "Placed a cube for Card-0" in session.message
+
+
+def test_render_screen_includes_full_session_sections() -> None:
+    controller = GameController(build_state())
     screen_text = render_screen(controller)
 
-    assert "Offers:" in screen_text
-    assert "Animal Row:" in screen_text
-    assert "Active Cards:" in screen_text
-    assert "Mt" in screen_text
+    assert "Summary" in screen_text
+    assert "Offers" in screen_text
+    assert "Active Cards" in screen_text
+    assert "Board" in screen_text
+    assert "Message" in screen_text
+
+
+def test_summary_and_offers_markup_highlight_current_draft() -> None:
+    session = GameSession(GameController(build_state()))
+    session.draft_selected_offer()
+
+    summary_markup = session.render_summary_panel_markup()
+    offers_markup = session.render_offers_panel_markup()
+
+    assert "#f6d365" in summary_markup
+    assert "#4b3a16" in offers_markup
+
+
+def test_textual_app_mounts_and_renders_panels() -> None:
+    async def run_app() -> None:
+        controller = GameController(build_state())
+        controller.draft_offer(0)
+        controller.place_next_token(Coordinate(0, 0))
+        app = HarmoniesTerminalApp(controller)
+        async with app.run_test():
+            summary = app.query_one("#summary-pane").render().plain
+            board = app.query_one("#board-pane").render().plain
+
+            assert "Summary" in summary
+            assert "Player 1 turn" in summary
+            assert "Pending tokens: field  wood" in summary
+            assert "Mt" in board
+
+    asyncio.run(run_app())

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, replace
+import random
 from typing import Optional
 
 from harmonies.board import create_player_board
@@ -224,11 +225,17 @@ class GameRules:
         return score_breakdown(player.board, player.all_cards())
 
 
-def build_bag(counts: Optional[dict[TerrainColor, int]] = None) -> tuple[TerrainColor, ...]:
+def build_bag(
+    counts: Optional[dict[TerrainColor, int]] = None,
+    *,
+    rng: Optional[random.Random] = None,
+) -> tuple[TerrainColor, ...]:
     contents = counts or DEFAULT_BAG_COUNTS
     bag: list[TerrainColor] = []
     for color, count in contents.items():
         bag.extend(color for _ in range(count))
+    if rng is not None:
+        rng.shuffle(bag)
     return tuple(bag)
 
 

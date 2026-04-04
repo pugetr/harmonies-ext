@@ -47,7 +47,7 @@ python -m pip install -e .[dev]
 
 ## Run The Game
 
-The current playable interface is a terminal prototype for a local two-player hotseat game.
+The playable interface is now a persistent full-screen terminal UI for a local two-player hotseat game.
 
 After installation, launch it with:
 
@@ -61,26 +61,24 @@ You can also run it directly from the source tree without installing the console
 PYTHONPATH=src python -m harmonies.cli
 ```
 
-The first version is command-driven rather than fully arrow-key driven. Type `help` in the prompt to see the available actions:
+The interface runs in the terminal alternate screen and keeps the board, offers, animal row, active cards, cursor details, and the latest action message visible at once.
 
-- `draft <offer_index>`
-- `place <q>,<r>`
-- `take <row_index>`
-- `cube <card_index> <q>,<r> [rotation]`
-- `end`
-- `quit`
+The playable app shuffles the terrain bag on startup, so the draft offers are randomized each game. The rules engine still accepts an explicit bag order directly when you want deterministic tests or scripted scenarios.
 
-Example session:
+Core controls:
 
-```text
-draft 0
-place 0,0
-place 1,0
-take 0
-cube 0 0,0
-place 2,0
-end
-```
+- Arrow keys or `hjkl`: move the board cursor
+- `o`: cycle drafted-offer selection
+- `n`: cycle animal-row selection
+- `c`: cycle active animal cards
+- `r`: rotate the current animal habitat preview
+- `d`: draft the selected offer
+- `t`: take the selected animal card
+- `Enter`, `Space`, or `p`: place the next terrain token or the previewed animal cube
+- `e`: end the turn
+- `q`: quit the session
+
+The board view highlights legal token placements or legal animal anchors for the currently selected card and rotation. When a cube placement is possible, the preview target is shown directly on the board.
 
 ## Design Notes
 
