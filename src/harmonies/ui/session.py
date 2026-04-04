@@ -2,8 +2,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from harmonies.cards import HabitatPattern, StackRequirement
 from harmonies.game import GameRules
-from harmonies.model import Coordinate
+from harmonies.model import Coordinate, TerrainColor
 from harmonies.ui.controller import AnimalPlacementOption, GameController
 from harmonies.ui.layout import BoardLayout, build_board_layout
 from harmonies.ui.render import (
@@ -23,6 +24,15 @@ INITIAL_MESSAGE = (
     "Draft an offer to begin. Move with arrows or hjkl, press d to draft, "
     "p or Enter to place, t to take an animal card, and r to rotate cube previews."
 )
+PATTERN_CELL_WIDTH = 5
+PATTERN_SYMBOLS = {
+    TerrainColor.WATER: "Wa",
+    TerrainColor.MOUNTAIN: "Mt",
+    TerrainColor.WOOD: "Wo",
+    TerrainColor.LEAF: "Le",
+    TerrainColor.FIELD: "Fi",
+    TerrainColor.BUILDING: "Bu",
+}
 
 
 @dataclass
@@ -348,6 +358,8 @@ class GameSession:
                 f"{marker} {index}: {card.definition.name} "
                 f"{card.cubes_placed}/{card.definition.cube_count}{preview}"
             )
+            if index == self.selected_card_index:
+                lines.extend(render_habitat_pattern(card.definition.habitat, self.selected_rotation))
         return "\n".join(lines)
 
     def render_cursor_panel(self) -> str:
@@ -498,3 +510,48 @@ class GameSession:
 
 def format_coordinate(coordinate: Coordinate) -> str:
     return f"{coordinate.q},{coordinate.r}"
+
+
+def render_habitat_pattern(pattern: HabitatPattern, rotation: int) -> list[str]:
+    requirements = pattern.rotated_requirements(rotation)
+    target = pattern.rotated_target(rotation)
+    coordinates = set(requirements)
+    coordinates.add(target)
+
+    row_min = min(coordinate.r for coordinate in coordinates)
+    row_max = max(coordinate.r for coordinate in coordinates)
+    column_min = min(_pattern_column(coordinate) for coordinate in coordinates)
+    width = max(_pattern_column(coordinate) for coordinate in coordinates) - column_min + PATTERN_CELL_WIDTH
+
+    canvas = [list(" " * width) for _ in range(row_max - row_min + 1)]
+    for coordinate in coordinates:
+        label = _pattern_cell_label(
+            requirements.get(coordinate),
+            is_target=coordinate == target,
+        ).ljust(PATTERN_CELL_WIDTH)
+        row = coordinate.r - row_min
+        column = _pattern_column(coordinate) - column_min
+        for offset, character in enumerate(label):
+            if character != " ":
+                canvas[row][column + offset] = character
+
+    return [
+        "    Pattern (* = target):",
+        *[f"    {''.join(row).rstrip()}" for row in canvas],
+    ]
+
+
+def _pattern_column(coordinate: Coordinate) -> int:
+    return coordinate.q * 4 + coordinate.r * 2
+
+
+def _pattern_cell_label(requirement: StackRequirement | None, is_target: bool) -> str:
+    if requirement is None:
+        return "T*" if is_target else ".."
+
+    label = PATTERN_SYMBOLS[requirement.top]
+    if requirement.height > 1:
+        label = f"{label}{requirement.height}"
+    if is_target:
+        label = f"{label}*"
+    return label

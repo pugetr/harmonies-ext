@@ -2,7 +2,7 @@
   "cards": [
     {
       "card_id": "base-card-01",
-      "name": "Base Card 01",
+      "name": "Crocodile",
       "source_image": "Screenshot 2026-04-04 at 08.49.01.png",
       "scores": [16, 10, 5],
       "target": [0, 0],
@@ -13,7 +13,7 @@
     },
     {
       "card_id": "base-card-02",
-      "name": "Base Card 02",
+      "name": "Stingray",
       "source_image": "Screenshot 2026-04-04 at 08.49.04.png",
       "scores": [15, 10, 6, 4, 2],
       "target": [0, 0],
@@ -24,7 +24,7 @@
     },
     {
       "card_id": "base-card-03",
-      "name": "Base Card 03",
+      "name": "Heron",
       "source_image": "Screenshot 2026-04-04 at 08.49.09.png",
       "scores": [13, 8, 4, 2],
       "target": [0, 0],
@@ -40,7 +40,7 @@
     },
     {
       "card_id": "base-card-04",
-      "name": "Base Card 04",
+      "name": "Otter",
       "source_image": "Screenshot 2026-04-04 at 08.49.13.png",
       "scores": [15, 9, 4],
       "target": [0, 0],
@@ -52,7 +52,7 @@
     },
     {
       "card_id": "base-card-05",
-      "name": "Base Card 05",
+      "name": "Frog",
       "source_image": "Screenshot 2026-04-04 at 08.49.16.png",
       "scores": [16, 10, 4],
       "target": [0, 0],
@@ -64,7 +64,7 @@
     },
     {
       "card_id": "base-card-06",
-      "name": "Base Card 06",
+      "name": "Duck",
       "source_image": "Screenshot 2026-04-04 at 08.49.33.png",
       "scores": [15, 10, 6, 3],
       "target": [0, 0],
@@ -75,7 +75,7 @@
     },
     {
       "card_id": "base-card-07",
-      "name": "Base Card 07",
+      "name": "Flamingo",
       "source_image": "Screenshot 2026-04-04 at 08.49.56.png",
       "scores": [16, 10, 5],
       "target": [0, 0],
@@ -92,7 +92,7 @@
     },
     {
       "card_id": "base-card-08",
-      "name": "Base Card 08",
+      "name": "Lizard",
       "source_image": "Screenshot 2026-04-04 at 08.50.07.png",
       "scores": [17, 10, 5],
       "target": [0, 0],
@@ -109,7 +109,7 @@
     },
     {
       "card_id": "base-card-09",
-      "name": "Base Card 09",
+      "name": "Mouse",
       "source_image": "Screenshot 2026-04-04 at 08.50.13.png",
       "scores": [12, 5],
       "target": [0, 0],
@@ -126,7 +126,7 @@
     },
     {
       "card_id": "base-card-10",
-      "name": "Base Card 10",
+      "name": "Peacock",
       "source_image": "Screenshot 2026-04-04 at 08.50.18.png",
       "scores": [17, 10, 5],
       "target": [0, 0],
@@ -143,7 +143,7 @@
     },
     {
       "card_id": "base-card-11",
-      "name": "Base Card 11",
+      "name": "Squirrel",
       "source_image": "Screenshot 2026-04-04 at 08.50.31.png",
       "scores": [16, 10, 4],
       "target": [0, 0],
@@ -155,7 +155,7 @@
     },
     {
       "card_id": "base-card-12",
-      "name": "Base Card 12",
+      "name": "Hedgehog",
       "source_image": "Screenshot 2026-04-04 at 08.50.38.png",
       "scores": [15, 9, 4],
       "target": [0, 0],
@@ -171,7 +171,7 @@
     },
     {
       "card_id": "base-card-13",
-      "name": "Base Card 13",
+      "name": "Bee",
       "source_image": "Screenshot 2026-04-04 at 08.50.47.png",
       "scores": [16, 10, 4],
       "target": [0, 0],
@@ -183,7 +183,7 @@
     },
     {
       "card_id": "base-card-14",
-      "name": "Base Card 14",
+      "name": "Bear",
       "source_image": "Screenshot 2026-04-04 at 08.50.59.png",
       "scores": [16, 9, 4],
       "target": [0, 0],
@@ -195,7 +195,7 @@
     },
     {
       "card_id": "base-card-15",
-      "name": "Base Card 15",
+      "name": "Rabbit",
       "source_image": "Screenshot 2026-04-04 at 08.51.03.png",
       "scores": [11, 5],
       "target": [0, 0],
@@ -207,7 +207,7 @@
     },
     {
       "card_id": "base-card-16",
-      "name": "Base Card 16",
+      "name": "Kingfisher",
       "source_image": "Screenshot 2026-04-04 at 08.51.07.png",
       "scores": [18, 11, 5],
       "target": [0, 0],
@@ -219,7 +219,7 @@
     },
     {
       "card_id": "base-card-17",
-      "name": "Base Card 17",
+      "name": "Wolf",
       "source_image": "Screenshot 2026-04-04 at 08.51.12.png",
       "scores": [15, 10, 6, 3],
       "target": [0, 0],
@@ -230,7 +230,7 @@
     },
     {
       "card_id": "base-card-18",
-      "name": "Base Card 18",
+      "name": "Koala",
       "source_image": "Screenshot 2026-04-04 at 08.51.17.png",
       "scores": [17, 12, 8, 5, 2],
       "target": [0, 0],
@@ -241,7 +241,7 @@
     },
     {
       "card_id": "base-card-19",
-      "name": "Base Card 19",
+      "name": "Wild Dog",
       "source_image": "Screenshot 2026-04-04 at 08.51.21.png",
       "scores": [11, 5],
       "target": [0, 0],
@@ -253,7 +253,7 @@
     },
     {
       "card_id": "base-card-20",
-      "name": "Base Card 20",
+      "name": "Songbirds",
       "source_image": "Screenshot 2026-04-04 at 08.51.25.png",
       "scores": [18, 11, 5],
       "target": [0, 0],
@@ -265,7 +265,7 @@
     },
     {
       "card_id": "base-card-21",
-      "name": "Base Card 21",
+      "name": "Penguin",
       "source_image": "Screenshot 2026-04-04 at 08.51.27.png",
       "scores": [12, 5],
       "target": [0, 0],
@@ -277,7 +277,7 @@
     },
     {
       "card_id": "base-card-22",
-      "name": "Base Card 22",
+      "name": "Bat",
       "source_image": "Screenshot 2026-04-04 at 08.51.31.png",
       "scores": [9, 4],
       "target": [0, 0],
@@ -299,7 +299,7 @@
     },
     {
       "card_id": "base-card-23",
-      "name": "Base Card 23",
+      "name": "Fox",
       "source_image": "Screenshot 2026-04-04 at 08.51.33.png",
       "scores": [17, 10, 5],
       "target": [0, 0],
@@ -311,7 +311,7 @@
     },
     {
       "card_id": "base-card-24",
-      "name": "Base Card 24",
+      "name": "Polar Bear",
       "source_image": "Screenshot 2026-04-04 at 08.51.36.png",
       "scores": [14, 9, 5, 2],
       "target": [0, 0],
@@ -322,7 +322,7 @@
     },
     {
       "card_id": "base-card-25",
-      "name": "Base Card 25",
+      "name": "Toucan",
       "source_image": "Screenshot 2026-04-04 at 08.51.39.png",
       "scores": [15, 10, 6, 3],
       "target": [0, 0],
@@ -333,7 +333,7 @@
     },
     {
       "card_id": "base-card-26",
-      "name": "Base Card 26",
+      "name": "Meerkat",
       "source_image": "Screenshot 2026-04-04 at 08.51.43.png",
       "scores": [17, 10, 5],
       "target": [0, 0],
@@ -350,7 +350,7 @@
     },
     {
       "card_id": "base-card-27",
-      "name": "Base Card 27",
+      "name": "Crow",
       "source_image": "Screenshot 2026-04-04 at 08.51.48.png",
       "scores": [11, 5],
       "target": [0, 0],
@@ -362,7 +362,7 @@
     },
     {
       "card_id": "base-card-28",
-      "name": "Base Card 28",
+      "name": "Alpaca",
       "source_image": "Screenshot 2026-04-04 at 08.51.57.png",
       "scores": [18, 8],
       "target": [0, 0],
@@ -375,7 +375,7 @@
     },
     {
       "card_id": "base-card-29",
-      "name": "Base Card 29",
+      "name": "Water Bird",
       "source_image": "Screenshot 2026-04-04 at 08.52.01.png",
       "scores": [14, 9, 4],
       "target": [0, 0],
@@ -387,7 +387,7 @@
     },
     {
       "card_id": "base-card-30",
-      "name": "Base Card 30",
+      "name": "Raccoon",
       "source_image": "Screenshot 2026-04-04 at 08.52.04.png",
       "scores": [13, 8, 4],
       "target": [0, 0],
@@ -403,7 +403,7 @@
     },
     {
       "card_id": "base-card-31",
-      "name": "Base Card 31",
+      "name": "Ladybug",
       "source_image": "Screenshot 2026-04-04 at 08.52.12.png",
       "scores": [11, 5],
       "target": [0, 0],
@@ -415,7 +415,7 @@
     },
     {
       "card_id": "base-card-32",
-      "name": "Base Card 32",
+      "name": "Black Cat",
       "source_image": "Screenshot 2026-04-04 at 08.52.15.png",
       "scores": [12, 6],
       "target": [0, 0],

@@ -219,6 +219,22 @@ def test_session_previews_and_places_animal_cube() -> None:
     assert "Placed a cube for Card-0" in session.message
 
 
+def test_active_cards_panel_shows_selected_card_pattern() -> None:
+    controller = GameController(build_state())
+    controller.draft_offer(0)
+    controller.place_next_token(Coordinate(0, 0))
+    controller.take_animal_card(0)
+    controller.place_next_token(Coordinate(1, 0))
+    controller.place_next_token(Coordinate(2, 0))
+    session = GameSession(controller)
+
+    panel = session.render_active_cards_panel()
+
+    assert "Pattern (* = target):" in panel
+    assert "Mt*" in panel
+    assert "Fi" in panel
+
+
 def test_render_screen_includes_full_session_sections() -> None:
     controller = GameController(build_state())
     screen_text = render_screen(controller)
