@@ -8,7 +8,8 @@
       "target": [0, 0],
       "requirements": [
         {"offset": [0, 0], "top": "water", "height": 1},
-        {"offset": [-1, 1], "top": "leaf", "height": 1}
+        {"offset": [-1, 1], "top": "leaf", "height": 1},
+        {"offset": [-2, 2], "top": "leaf", "height": 1}
       ]
     },
     {
@@ -176,9 +177,9 @@
       "scores": [16, 10, 4],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "mountain", "height": 1},
-        {"offset": [1, -1], "top": "water", "height": 1},
-        {"offset": [1, 0], "top": "water", "height": 1}
+        {"offset": [0, 0], "top": "leaf", "height": 3},
+        {"offset": [-1, 1], "top": "field", "height": 1},
+        {"offset": [0, 1], "top": "field", "height": 1}
       ]
     },
     {
@@ -189,8 +190,8 @@
       "target": [0, 0],
       "requirements": [
         {"offset": [0, 0], "top": "mountain", "height": 1},
-        {"offset": [-1, 1], "top": "water", "height": 1},
-        {"offset": [-2, 2], "top": "field", "height": 1}
+        {"offset": [1, -1], "top": "water", "height": 1},
+        {"offset": [1, 0], "top": "water", "height": 1}
       ]
     },
     {
@@ -201,8 +202,8 @@
       "target": [0, 0],
       "requirements": [
         {"offset": [0, 0], "top": "mountain", "height": 1},
-        {"offset": [-1, 1], "top": "water", "height": 1},
-        {"offset": [0, 1], "top": "water", "height": 1}
+        {"offset": [-1, 1], "top": "mountain", "height": 1},
+        {"offset": [-2, 2], "top": "field", "height": 1}
       ]
     },
     {
@@ -212,9 +213,9 @@
       "scores": [18, 11, 5],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "leaf", "height": 3},
-        {"offset": [1, -1], "top": "water", "height": 1},
-        {"offset": [1, 0], "top": "water", "height": 1}
+        {"offset": [0, 0], "top": "mountain", "height": 2},
+        {"offset": [-1, 1], "top": "water", "height": 1},
+        {"offset": [0, 1], "top": "water", "height": 1}
       ]
     },
     {
@@ -224,8 +225,9 @@
       "scores": [15, 10, 6, 3],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "mountain", "height": 1},
-        {"offset": [-1, 1], "top": "leaf", "height": 3}
+        {"offset": [0, 0], "top": "leaf", "height": 3},
+        {"offset": [1, -1], "top": "water", "height": 1},
+        {"offset": [1, 0], "top": "water", "height": 1}
       ]
     },
     {
@@ -235,8 +237,8 @@
       "scores": [17, 12, 8, 5, 2],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "field", "height": 1},
-        {"offset": [-1, 1], "top": "leaf", "height": 1}
+        {"offset": [0, 0], "top": "mountain", "height": 1},
+        {"offset": [-1, 1], "top": "leaf", "height": 3}
       ]
     },
     {
@@ -246,9 +248,8 @@
       "scores": [11, 5],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "mountain", "height": 3},
-        {"offset": [-1, 1], "top": "water", "height": 1},
-        {"offset": [0, 1], "top": "water", "height": 1}
+        {"offset": [0, 0], "top": "field", "height": 1},
+        {"offset": [-1, 1], "top": "leaf", "height": 1}
       ]
     },
     {
@@ -258,9 +259,8 @@
       "scores": [18, 11, 5],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "leaf", "height": 3},
-        {"offset": [1, -1], "top": "water", "height": 1},
-        {"offset": [1, 0], "top": "water", "height": 1}
+        {"offset": [0, 0], "top": "mountain", "height": 3},
+        {"offset": [-1, 1], "top": "field", "height": 1}
       ]
     },
     {
@@ -381,8 +381,8 @@
       "target": [0, 0],
       "requirements": [
         {"offset": [0, 0], "top": "leaf", "height": 2},
-        {"offset": [1, -1], "top": "water", "height": 1},
-        {"offset": [1, 0], "top": "water", "height": 1}
+        {"offset": [-1, 1], "top": "water", "height": 1},
+        {"offset": [0, 1], "top": "water", "height": 1}
       ]
     },
     {
