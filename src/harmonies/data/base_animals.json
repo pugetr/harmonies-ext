@@ -8,8 +8,8 @@
       "target": [0, 0],
       "requirements": [
         {"offset": [0, 0], "top": "water", "height": 1},
-        {"offset": [-1, 1], "top": "leaf", "height": 1},
-        {"offset": [-2, 2], "top": "leaf", "height": 1}
+        {"offset": [-1, 1], "top": "water", "height": 1},
+        {"offset": [-2, 2], "top": "leaf", "height": 3}
       ]
     },
     {
@@ -20,7 +20,8 @@
       "target": [0, 0],
       "requirements": [
         {"offset": [0, 0], "top": "water", "height": 1},
-        {"offset": [-1, 1], "top": "leaf", "height": 1}
+        {"offset": [-1, 1], "top": "mountain", "height": 1},
+        {"offset": [0, 1], "top": "mountain", "height": 1}
       ]
     },
     {
@@ -28,6 +29,40 @@
       "name": "Heron",
       "source_image": "Screenshot 2026-04-04 at 08.49.09.png",
       "scores": [13, 8, 4, 2],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "water", "height": 1},
+        {"offset": [-1, 1], "top": "mountain", "height": 3}
+      ]
+    },
+    {
+      "card_id": "base-card-04",
+      "name": "Otter",
+      "source_image": "Screenshot 2026-04-04 at 08.49.13.png",
+      "scores": [15, 9, 4],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "water", "height": 1},
+        {"offset": [-1, 1], "top": "leaf", "height": 1},
+        {"offset": [-2, 2], "top": "leaf", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-05",
+      "name": "Frog",
+      "source_image": "Screenshot 2026-04-04 at 08.49.16.png",
+      "scores": [16, 10, 4],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "water", "height": 1},
+        {"offset": [-1, 1], "top": "leaf", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-06",
+      "name": "Duck",
+      "source_image": "Screenshot 2026-04-04 at 08.49.33.png",
+      "scores": [15, 10, 6, 3],
       "target": [0, 0],
       "requirements": [
         {"offset": [0, 0], "top": "water", "height": 1},
@@ -40,55 +75,15 @@
       ]
     },
     {
-      "card_id": "base-card-04",
-      "name": "Otter",
-      "source_image": "Screenshot 2026-04-04 at 08.49.13.png",
-      "scores": [15, 9, 4],
-      "target": [0, 0],
-      "requirements": [
-        {"offset": [0, 0], "top": "water", "height": 1},
-        {"offset": [-1, 1], "top": "water", "height": 1},
-        {"offset": [-2, 2], "top": "leaf", "height": 3}
-      ]
-    },
-    {
-      "card_id": "base-card-05",
-      "name": "Frog",
-      "source_image": "Screenshot 2026-04-04 at 08.49.16.png",
-      "scores": [16, 10, 4],
-      "target": [0, 0],
-      "requirements": [
-        {"offset": [0, 0], "top": "water", "height": 1},
-        {"offset": [-1, 1], "top": "mountain", "height": 1},
-        {"offset": [0, 1], "top": "mountain", "height": 1}
-      ]
-    },
-    {
-      "card_id": "base-card-06",
-      "name": "Duck",
-      "source_image": "Screenshot 2026-04-04 at 08.49.33.png",
-      "scores": [15, 10, 6, 3],
-      "target": [0, 0],
-      "requirements": [
-        {"offset": [0, 0], "top": "water", "height": 1},
-        {"offset": [-1, 1], "top": "mountain", "height": 3}
-      ]
-    },
-    {
       "card_id": "base-card-07",
       "name": "Flamingo",
       "source_image": "Screenshot 2026-04-04 at 08.49.56.png",
       "scores": [16, 10, 5],
       "target": [0, 0],
       "requirements": [
-        {
-          "offset": [0, 0],
-          "top": "building",
-          "height": 2,
-          "building_base_allowed": ["mountain", "wood", "building"]
-        },
+        {"offset": [0, 0], "top": "water", "height": 1},
         {"offset": [-1, 1], "top": "field", "height": 1},
-        {"offset": [-2, 2], "top": "field", "height": 1}
+        {"offset": [0, 1], "top": "field", "height": 1}
       ]
     },
     {
@@ -104,8 +99,8 @@
           "height": 2,
           "building_base_allowed": ["mountain", "wood", "building"]
         },
-        {"offset": [1, -1], "top": "water", "height": 1},
-        {"offset": [1, 0], "top": "water", "height": 1}
+        {"offset": [-1, 1], "top": "field", "height": 1},
+        {"offset": [-2, 2], "top": "field", "height": 1}
       ]
     },
     {
@@ -121,8 +116,8 @@
           "height": 2,
           "building_base_allowed": ["mountain", "wood", "building"]
         },
-        {"offset": [-1, 1], "top": "leaf", "height": 2},
-        {"offset": [0, 1], "top": "leaf", "height": 2}
+        {"offset": [1, -1], "top": "field", "height": 1},
+        {"offset": [1, 0], "top": "field", "height": 1}
       ]
     },
     {
@@ -138,8 +133,8 @@
           "height": 2,
           "building_base_allowed": ["mountain", "wood", "building"]
         },
-        {"offset": [1, -1], "top": "field", "height": 1},
-        {"offset": [1, 0], "top": "field", "height": 1}
+        {"offset": [1, -1], "top": "water", "height": 1},
+        {"offset": [1, 0], "top": "water", "height": 1}
       ]
     },
     {
@@ -149,9 +144,13 @@
       "scores": [16, 10, 4],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "water", "height": 1},
-        {"offset": [-1, 1], "top": "field", "height": 1},
-        {"offset": [0, 1], "top": "field", "height": 1}
+        {
+          "offset": [0, 0],
+          "top": "building",
+          "height": 2,
+          "building_base_allowed": ["mountain", "wood", "building"]
+        },
+        {"offset": [-1, 1], "top": "leaf", "height": 3}
       ]
     },
     {
@@ -167,7 +166,8 @@
           "height": 2,
           "building_base_allowed": ["mountain", "wood", "building"]
         },
-        {"offset": [-1, 1], "top": "leaf", "height": 3}
+        {"offset": [-1, 1], "top": "leaf", "height": 2},
+        {"offset": [0, 1], "top": "leaf", "height": 2}
       ]
     },
     {
@@ -177,8 +177,9 @@
       "scores": [16, 10, 4],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "leaf", "height": 3},
-        {"offset": [-1, 1], "top": "field", "height": 1},
+        {"offset": [0, 0], "top": "leaf", "height": 2},
+        {"offset": [1, -1], "top": "field", "height": 1},
+        {"offset": [1, 0], "top": "field", "height": 1},
         {"offset": [0, 1], "top": "field", "height": 1}
       ]
     },
@@ -189,9 +190,9 @@
       "scores": [16, 9, 4],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "mountain", "height": 1},
-        {"offset": [1, -1], "top": "water", "height": 1},
-        {"offset": [1, 0], "top": "water", "height": 1}
+        {"offset": [0, 0], "top": "leaf", "height": 1},
+        {"offset": [-1, 1], "top": "mountain", "height": 2},
+        {"offset": [0, 1], "top": "mountain", "height": 2}
       ]
     },
     {
@@ -201,9 +202,14 @@
       "scores": [11, 5],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "mountain", "height": 1},
-        {"offset": [-1, 1], "top": "mountain", "height": 1},
-        {"offset": [-2, 2], "top": "field", "height": 1}
+        {"offset": [0, 0], "top": "leaf", "height": 1},
+        {"offset": [-1, 1], "top": "leaf", "height": 1},
+        {
+          "offset": [-2, 2],
+          "top": "building",
+          "height": 2,
+          "building_base_allowed": ["mountain", "wood", "building"]
+        }
       ]
     },
     {
@@ -213,7 +219,7 @@
       "scores": [18, 11, 5],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "mountain", "height": 2},
+        {"offset": [0, 0], "top": "leaf", "height": 2},
         {"offset": [-1, 1], "top": "water", "height": 1},
         {"offset": [0, 1], "top": "water", "height": 1}
       ]
@@ -225,9 +231,13 @@
       "scores": [15, 10, 6, 3],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "leaf", "height": 3},
-        {"offset": [1, -1], "top": "water", "height": 1},
-        {"offset": [1, 0], "top": "water", "height": 1}
+        {"offset": [0, 0], "top": "leaf", "height": 2},
+        {
+          "offset": [-1, 1],
+          "top": "building",
+          "height": 2,
+          "building_base_allowed": ["mountain", "wood", "building"]
+        }
       ]
     },
     {
@@ -237,8 +247,8 @@
       "scores": [17, 12, 8, 5, 2],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "mountain", "height": 1},
-        {"offset": [-1, 1], "top": "leaf", "height": 3}
+        {"offset": [0, 0], "top": "leaf", "height": 2},
+        {"offset": [-1, 1], "top": "leaf", "height": 1}
       ]
     },
     {
@@ -248,8 +258,9 @@
       "scores": [11, 5],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "field", "height": 1},
-        {"offset": [-1, 1], "top": "leaf", "height": 1}
+        {"offset": [0, 0], "top": "leaf", "height": 3},
+        {"offset": [-1, 1], "top": "field", "height": 1},
+        {"offset": [0, 1], "top": "field", "height": 1}
       ]
     },
     {
@@ -259,8 +270,9 @@
       "scores": [18, 11, 5],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "mountain", "height": 3},
-        {"offset": [-1, 1], "top": "field", "height": 1}
+        {"offset": [0, 0], "top": "leaf", "height": 3},
+        {"offset": [1, -1], "top": "water", "height": 1},
+        {"offset": [1, 0], "top": "water", "height": 1}
       ]
     },
     {
@@ -270,9 +282,9 @@
       "scores": [12, 5],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "field", "height": 1},
-        {"offset": [-1, 1], "top": "field", "height": 1},
-        {"offset": [-2, 2], "top": "mountain", "height": 2}
+        {"offset": [0, 0], "top": "mountain", "height": 1},
+        {"offset": [1, -1], "top": "water", "height": 1},
+        {"offset": [1, 0], "top": "water", "height": 1}
       ]
     },
     {
@@ -280,6 +292,63 @@
       "name": "Bat",
       "source_image": "Screenshot 2026-04-04 at 08.51.31.png",
       "scores": [9, 4],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "mountain", "height": 1},
+        {"offset": [-1, 1], "top": "leaf", "height": 3}
+      ]
+    },
+    {
+      "card_id": "base-card-23",
+      "name": "Fox",
+      "source_image": "Screenshot 2026-04-04 at 08.51.33.png",
+      "scores": [17, 10, 5],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "mountain", "height": 1},
+        {"offset": [-1, 1], "top": "mountain", "height": 1},
+        {"offset": [-2, 2], "top": "field", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-24",
+      "name": "Polar Bear",
+      "source_image": "Screenshot 2026-04-04 at 08.51.36.png",
+      "scores": [14, 9, 5, 2],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "mountain", "height": 2},
+        {"offset": [-1, 1], "top": "water", "height": 1},
+        {"offset": [0, 1], "top": "water", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-25",
+      "name": "Toucan",
+      "source_image": "Screenshot 2026-04-04 at 08.51.39.png",
+      "scores": [15, 10, 6, 3],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "mountain", "height": 3},
+        {"offset": [-1, 1], "top": "field", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-26",
+      "name": "Meerkat",
+      "source_image": "Screenshot 2026-04-04 at 08.51.43.png",
+      "scores": [17, 10, 5],
+      "target": [0, 0],
+      "requirements": [
+        {"offset": [0, 0], "top": "mountain", "height": 1},
+        {"offset": [-1, 1], "top": "field", "height": 1}
+      ]
+    },
+    {
+      "card_id": "base-card-27",
+      "name": "Crow",
+      "source_image": "Screenshot 2026-04-04 at 08.51.48.png",
+      "scores": [11, 5],
       "target": [0, 0],
       "requirements": [
         {"offset": [0, 0], "top": "field", "height": 1},
@@ -298,79 +367,15 @@
       ]
     },
     {
-      "card_id": "base-card-23",
-      "name": "Fox",
-      "source_image": "Screenshot 2026-04-04 at 08.51.33.png",
-      "scores": [17, 10, 5],
-      "target": [0, 0],
-      "requirements": [
-        {"offset": [0, 0], "top": "field", "height": 1},
-        {"offset": [1, -1], "top": "leaf", "height": 2},
-        {"offset": [1, 0], "top": "leaf", "height": 2}
-      ]
-    },
-    {
-      "card_id": "base-card-24",
-      "name": "Polar Bear",
-      "source_image": "Screenshot 2026-04-04 at 08.51.36.png",
-      "scores": [14, 9, 5, 2],
-      "target": [0, 0],
-      "requirements": [
-        {"offset": [0, 0], "top": "mountain", "height": 1},
-        {"offset": [-1, 1], "top": "field", "height": 1}
-      ]
-    },
-    {
-      "card_id": "base-card-25",
-      "name": "Toucan",
-      "source_image": "Screenshot 2026-04-04 at 08.51.39.png",
-      "scores": [15, 10, 6, 3],
-      "target": [0, 0],
-      "requirements": [
-        {"offset": [0, 0], "top": "leaf", "height": 2},
-        {"offset": [-1, 1], "top": "leaf", "height": 1}
-      ]
-    },
-    {
-      "card_id": "base-card-26",
-      "name": "Meerkat",
-      "source_image": "Screenshot 2026-04-04 at 08.51.43.png",
-      "scores": [17, 10, 5],
-      "target": [0, 0],
-      "requirements": [
-        {"offset": [0, 0], "top": "leaf", "height": 1},
-        {"offset": [-1, 1], "top": "leaf", "height": 1},
-        {
-          "offset": [-2, 2],
-          "top": "building",
-          "height": 2,
-          "building_base_allowed": ["mountain", "wood", "building"]
-        }
-      ]
-    },
-    {
-      "card_id": "base-card-27",
-      "name": "Crow",
-      "source_image": "Screenshot 2026-04-04 at 08.51.48.png",
-      "scores": [11, 5],
-      "target": [0, 0],
-      "requirements": [
-        {"offset": [0, 0], "top": "leaf", "height": 1},
-        {"offset": [-1, 1], "top": "mountain", "height": 2},
-        {"offset": [0, 1], "top": "mountain", "height": 2}
-      ]
-    },
-    {
       "card_id": "base-card-28",
       "name": "Alpaca",
       "source_image": "Screenshot 2026-04-04 at 08.51.57.png",
       "scores": [18, 8],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "leaf", "height": 2},
-        {"offset": [1, -1], "top": "field", "height": 1},
-        {"offset": [1, 0], "top": "field", "height": 1},
-        {"offset": [0, 1], "top": "field", "height": 1}
+        {"offset": [0, 0], "top": "field", "height": 1},
+        {"offset": [-1, 1], "top": "field", "height": 1},
+        {"offset": [-2, 2], "top": "mountain", "height": 2}
       ]
     },
     {
@@ -380,9 +385,9 @@
       "scores": [14, 9, 4],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "leaf", "height": 2},
-        {"offset": [-1, 1], "top": "water", "height": 1},
-        {"offset": [0, 1], "top": "water", "height": 1}
+        {"offset": [0, 0], "top": "field", "height": 1},
+        {"offset": [1, -1], "top": "leaf", "height": 2},
+        {"offset": [1, 0], "top": "leaf", "height": 2}
       ]
     },
     {
@@ -392,13 +397,10 @@
       "scores": [13, 8, 4],
       "target": [0, 0],
       "requirements": [
-        {"offset": [0, 0], "top": "leaf", "height": 2},
-        {
-          "offset": [-1, 1],
-          "top": "building",
-          "height": 2,
-          "building_base_allowed": ["mountain", "wood", "building"]
-        }
+        {"offset": [0, 0], "top": "field", "height": 1},
+        {"offset": [1, -1], "top": "water", "height": 1},
+        {"offset": [1, 0], "top": "water", "height": 1},
+        {"offset": [0, 1], "top": "water", "height": 1}
       ]
     },
     {
@@ -409,8 +411,7 @@
       "target": [0, 0],
       "requirements": [
         {"offset": [0, 0], "top": "field", "height": 1},
-        {"offset": [-1, 1], "top": "leaf", "height": 2},
-        {"offset": [-2, 2], "top": "leaf", "height": 2}
+        {"offset": [-1, 1], "top": "leaf", "height": 1}
       ]
     },
     {
@@ -421,9 +422,8 @@
       "target": [0, 0],
       "requirements": [
         {"offset": [0, 0], "top": "field", "height": 1},
-        {"offset": [1, -1], "top": "water", "height": 1},
-        {"offset": [1, 0], "top": "water", "height": 1},
-        {"offset": [0, 1], "top": "water", "height": 1}
+        {"offset": [-1, 1], "top": "leaf", "height": 2},
+        {"offset": [-2, 2], "top": "leaf", "height": 2}
       ]
     }
   ]
