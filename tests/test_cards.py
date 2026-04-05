@@ -18,7 +18,9 @@ def test_loaded_cards_preserve_scores_and_requirement_shapes() -> None:
     assert first.points_by_cubes_placed == (0, 16, 10, 5)
     assert first.habitat.target_offset == Coordinate(0, 0)
     assert first.habitat.requirements[Coordinate(0, 0)].top == TerrainColor.WATER
-    assert first.habitat.requirements[Coordinate(-1, 1)].top == TerrainColor.LEAF
+    assert first.habitat.requirements[Coordinate(-1, 1)].top == TerrainColor.WATER
+    assert first.habitat.requirements[Coordinate(-2, 2)].top == TerrainColor.LEAF
+    assert first.habitat.requirements[Coordinate(-2, 2)].height == 3
 
     building_card = deck[7]
     target_requirement = building_card.habitat.requirements[Coordinate(0, 0)]
@@ -30,7 +32,7 @@ def test_loaded_cards_preserve_scores_and_requirement_shapes() -> None:
         TerrainColor.BUILDING,
     }
 
-    four_space_card = deck[31]
+    four_space_card = deck[12]
     assert set(four_space_card.habitat.requirements) == {
         Coordinate(0, 0),
         Coordinate(1, -1),
