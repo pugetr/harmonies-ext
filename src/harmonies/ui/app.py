@@ -67,6 +67,7 @@ class HarmoniesTerminalApp(App[None]):
         Binding("up,k", "move_up", "Up", show=False),
         Binding("down,j", "move_down", "Down", show=False),
         Binding("o", "cycle_offer", "Offer"),
+        Binding("s", "cycle_pending_token", "Token"),
         Binding("n", "cycle_animal", "Animal"),
         Binding("c", "cycle_card", "Card"),
         Binding("r", "rotate", "Rotate"),
@@ -126,6 +127,10 @@ class HarmoniesTerminalApp(App[None]):
 
     def action_cycle_offer(self) -> None:
         self.session.cycle_offer()
+        self.refresh_view()
+
+    def action_cycle_pending_token(self) -> None:
+        self.session.cycle_pending_token()
         self.refresh_view()
 
     def action_cycle_animal(self) -> None:

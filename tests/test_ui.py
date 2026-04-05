@@ -177,6 +177,21 @@ def test_session_places_tokens_and_reports_board_state() -> None:
     assert session.current_player.board.cell(Coordinate(0, 0)).top_color == TerrainColor.MOUNTAIN
 
 
+def test_session_can_cycle_pending_drafted_tokens() -> None:
+    session = GameSession(GameController(build_state()))
+
+    session.draft_selected_offer()
+    session.cycle_pending_token()
+
+    assert session.controller.pending_tokens == (
+        TerrainColor.FIELD,
+        TerrainColor.WOOD,
+        TerrainColor.MOUNTAIN,
+    )
+    assert "Active drafted token: field." in session.message
+    assert Coordinate(0, 0) in session.board_highlights()
+
+
 def test_session_vertical_navigation_stays_in_two_columns() -> None:
     session = GameSession(GameController(build_state()))
 

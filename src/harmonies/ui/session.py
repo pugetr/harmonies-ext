@@ -22,7 +22,8 @@ from harmonies.ui.render import (
 
 INITIAL_MESSAGE = (
     "Draft an offer to begin. Move with arrows or hjkl, press d to draft, "
-    "p or Enter to place, t to take an animal card, and r to rotate cube previews."
+    "s to cycle drafted tokens, p or Enter to place, t to take an animal card, "
+    "and r to rotate cube previews."
 )
 PATTERN_CELL_WIDTH = 5
 PATTERN_SYMBOLS = {
@@ -95,6 +96,24 @@ class GameSession:
         self.selected_offer_index = self._next_index(self.selected_offer_index, indexes)
         self.message = f"Selected offer {self.selected_offer_index}."
 
+    def cycle_pending_token(self) -> None:
+        pending_tokens = self.state.turn.pending_tokens
+        if not pending_tokens:
+            self.message = "There are no drafted terrain tokens to cycle."
+            return
+        if len(pending_tokens) == 1:
+            self.message = "Only one drafted terrain token remains to place."
+            return
+
+        error = self.controller.cycle_pending_tokens()
+        if error:
+            self.message = error
+            return
+
+        active_token = self.state.turn.pending_tokens[0]
+        queued_tokens = ", ".join(color.value for color in self.state.turn.pending_tokens[1:])
+        self.message = f"Active drafted token: {active_token.value}. Queue: {queued_tokens}."
+
     def cycle_animal_row(self) -> None:
         indexes = tuple(range(len(self.state.animal_row)))
         if not indexes:
@@ -136,7 +155,10 @@ class GameSession:
             self.message = error
             return
         drafted = ", ".join(color.value for color in self.state.turn.pending_tokens)
-        self.message = f"Drafted offer {self.selected_offer_index}: {drafted}."
+        self.message = (
+            f"Drafted offer {self.selected_offer_index}: {drafted}. "
+            "Press s to switch which token is active."
+        )
         self._normalize_selection_state()
 
     def take_selected_animal_card(self) -> None:
@@ -390,6 +412,7 @@ class GameSession:
                 "",
                 "Move cursor: arrows or hjkl",
                 "Cycle offer: o",
+                "Cycle drafted token: s",
                 "Cycle animal row: n",
                 "Cycle active card: c",
                 "Rotate preview: r",

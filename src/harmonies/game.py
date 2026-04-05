@@ -104,6 +104,18 @@ class GameRules:
         return replace(state, offers=offers, turn=turn)
 
     @staticmethod
+    def cycle_pending_tokens(state: GameState) -> GameState:
+        _assert_not_game_over(state)
+        if not state.turn.pending_tokens:
+            raise ValueError("there are no pending drafted tokens to cycle")
+        if len(state.turn.pending_tokens) == 1:
+            raise ValueError("there is only one pending drafted token left to place")
+
+        pending_tokens = state.turn.pending_tokens[1:] + state.turn.pending_tokens[:1]
+        updated_turn = replace(state.turn, pending_tokens=pending_tokens)
+        return replace(state, turn=updated_turn)
+
+    @staticmethod
     def place_next_token(state: GameState, coordinate: Coordinate) -> GameState:
         _assert_not_game_over(state)
         if not state.turn.pending_tokens:

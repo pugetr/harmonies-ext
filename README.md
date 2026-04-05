@@ -69,6 +69,7 @@ Core controls:
 
 - Arrow keys or `hjkl`: move the board cursor
 - `o`: cycle drafted-offer selection
+- `s`: cycle the active drafted terrain token before placing it
 - `n`: cycle animal-row selection
 - `c`: cycle active animal cards
 - `r`: rotate the current animal habitat preview

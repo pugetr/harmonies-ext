@@ -98,6 +98,9 @@ class GameController:
     def draft_offer(self, offer_index: int) -> Optional[str]:
         return self._apply(GameRules.draft_offer, offer_index)
 
+    def cycle_pending_tokens(self) -> Optional[str]:
+        return self._apply(GameRules.cycle_pending_tokens)
+
     def place_next_token(self, coordinate: Coordinate) -> Optional[str]:
         return self._apply(GameRules.place_next_token, coordinate)
 

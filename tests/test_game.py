@@ -72,6 +72,29 @@ def test_turn_can_interleave_token_placement_card_take_and_cube_placement() -> N
     assert state.players[0].active_cards[0].cubes_placed == 1
 
 
+def test_cycle_pending_tokens_rotates_active_draft_order() -> None:
+    state = build_state()
+    state = GameRules.draft_offer(state, 0)
+
+    assert state.turn.pending_tokens == (
+        TerrainColor.MOUNTAIN,
+        TerrainColor.FIELD,
+        TerrainColor.WOOD,
+    )
+
+    state = GameRules.cycle_pending_tokens(state)
+
+    assert state.turn.pending_tokens == (
+        TerrainColor.FIELD,
+        TerrainColor.WOOD,
+        TerrainColor.MOUNTAIN,
+    )
+
+    state = GameRules.place_next_token(state, Coordinate(0, 0))
+
+    assert state.players[0].board.cell(Coordinate(0, 0)).top_color == TerrainColor.FIELD
+
+
 def test_completed_card_frees_active_card_slot() -> None:
     state = build_state()
     state = GameRules.draft_offer(state, 0)
