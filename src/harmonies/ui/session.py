@@ -349,9 +349,9 @@ class GameSession:
 
     def render_active_cards_panel(self) -> str:
         preview = self.current_preview()
-        rotation_label = preview.rotation if preview else "auto"
+        displayed_rotation = preview.rotation if preview else "auto"
         preview_rotation = preview.rotation if preview else 0
-        lines = ["Active Cards", "", f"Rotation: {rotation_label}"]
+        lines = ["Active Cards", "", f"Rotation: {displayed_rotation}"]
         if not self.current_player.active_cards:
             lines.append("  none")
             return "\n".join(lines)
