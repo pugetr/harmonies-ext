@@ -5,7 +5,7 @@ import random
 from rich.text import Text
 from textual.app import App, ComposeResult
 from textual.binding import Binding
-from textual.containers import Horizontal, VerticalScroll
+from textual.containers import Horizontal, Vertical, VerticalScroll
 from textual.widgets import Footer, Header, Static
 
 from harmonies.cards import load_base_animal_deck
@@ -42,15 +42,35 @@ class HarmoniesTerminalApp(App[None]):
         height: 1fr;
     }
 
+    #play-area {
+        width: 1fr;
+        height: 1fr;
+    }
+
+    #animal-pane {
+        border: round $surface;
+        padding: 1 2;
+        margin: 0 1 1 0;
+        height: auto;
+    }
+
     #board-pane {
         width: 1fr;
+        height: 1fr;
         border: round $accent;
         padding: 1 2;
+        margin: 0 1 1 0;
+    }
+
+    #cards-pane {
+        border: round #d9b44a;
+        padding: 1 2;
         margin: 0 1 0 0;
+        height: auto;
     }
 
     #sidebar {
-        width: 42;
+        width: 40;
         border: round $surface;
         padding: 0 1;
     }
@@ -85,12 +105,13 @@ class HarmoniesTerminalApp(App[None]):
     def compose(self) -> ComposeResult:
         yield Header()
         with Horizontal(id="body"):
-            yield Static(id="board-pane")
+            with Vertical(id="play-area"):
+                yield Static(id="animal-pane")
+                yield Static(id="board-pane")
+                yield Static(id="cards-pane")
             with VerticalScroll(id="sidebar"):
                 yield Static(id="summary-pane", classes="panel")
                 yield Static(id="offers-pane", classes="panel")
-                yield Static(id="animal-pane", classes="panel")
-                yield Static(id="cards-pane", classes="panel")
                 yield Static(id="cursor-pane", classes="panel")
                 yield Static(id="message-pane", classes="panel")
                 yield Static(id="controls-pane", classes="panel")

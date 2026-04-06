@@ -292,6 +292,7 @@ def test_active_cards_panel_shows_selected_card_pattern() -> None:
     assert "Pattern (* = target):" in panel
     assert "Mt*" in panel
     assert "Fi" in panel
+    assert "preview:" in panel
 
 
 def test_render_screen_includes_full_session_sections() -> None:
@@ -300,9 +301,23 @@ def test_render_screen_includes_full_session_sections() -> None:
 
     assert "Summary" in screen_text
     assert "Offers" in screen_text
+    assert "Animal Pool" in screen_text
     assert "Active Cards" in screen_text
     assert "Board" in screen_text
     assert "Message" in screen_text
+    assert screen_text.index("Animal Pool") < screen_text.index("Board")
+    assert screen_text.index("Board") < screen_text.index("Active Cards")
+
+
+def test_animal_pool_panel_shows_ascii_icon_and_selected_pattern() -> None:
+    session = GameSession(GameController(build_state()))
+
+    panel = session.render_animal_row_panel()
+
+    assert "Animal Pool" in panel
+    assert "(o_o)" in panel
+    assert "Selected: Card-0" in panel
+    assert "Pattern (* = target):" in panel
 
 
 def test_summary_and_offers_markup_highlight_current_draft() -> None:

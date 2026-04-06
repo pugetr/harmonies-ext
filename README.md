@@ -61,7 +61,7 @@ You can also run it directly from the source tree without installing the console
 PYTHONPATH=src python -m harmonies.cli
 ```
 
-The interface runs in the terminal alternate screen and keeps the board, offers, animal row, active cards, cursor details, and the latest action message visible at once.
+The interface runs in the terminal alternate screen and keeps the animal pool above the board, active animal cards below it, and the turn details in a side rail so card selection is easier to follow at a glance. Animal cards now include compact ASCII animal markers in the UI to make them faster to recognize.
 
 The playable app shuffles the terrain bag on startup, so the draft offers are randomized each game. The rules engine still accepts an explicit bag order directly when you want deterministic tests or scripted scenarios.
 

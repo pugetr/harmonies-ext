@@ -26,6 +26,7 @@ INITIAL_MESSAGE = (
     "and r to rotate cube previews."
 )
 PATTERN_CELL_WIDTH = 5
+ASCII_ICON_WIDTH = 10
 PATTERN_SYMBOLS = {
     TerrainColor.WATER: "Wa",
     TerrainColor.MOUNTAIN: "Mt",
@@ -33,6 +34,40 @@ PATTERN_SYMBOLS = {
     TerrainColor.LEAF: "Le",
     TerrainColor.FIELD: "Fi",
     TerrainColor.BUILDING: "Bu",
+}
+ANIMAL_ASCII_ICONS = {
+    "Crocodile": "__,====>",
+    "Stingray": "_/\\__/\\_",
+    "Salmon": "<'(((><",
+    "Otter": "__(o.o)__",
+    "Frog": "@..@",
+    "Duck": "__(o)<",
+    "Flamingo": "\\_o_/|",
+    "Lizard": "_.-^^>-",
+    "Mouse": "()_()",
+    "Peacock": "\\(o)/",
+    "Squirrel": "/\\_/\\\\",
+    "Hedgehog": "/V\\^/V\\",
+    "Bee": "(:)=|",
+    "Bear": "(o,,o)",
+    "Rabbit": "(\\_/)",
+    "Parrot": "<(o_)",
+    "Wild Boar": "~(oo)^",
+    "Koala": "@(o.o)@",
+    "Wolf": "/\\^/\\\\",
+    "Kingfisher": ">'))'>",
+    "Penguin": "<(o )",
+    "Bat": "/\\__/\\\\",
+    "Fennec": "/\\_./\\\\",
+    "Macaque": "@(^.^)@",
+    "Condor": "\\\\v//",
+    "Meerkat": "\\o/|",
+    "Crow": "\\\\_/",
+    "Alpaca": "('')>//",
+    "Arctic Fox": "/\\*_/\\\\",
+    "Raccoon": "[o.o]~",
+    "Ladybug": "(_@_)",
+    "Panther": "/\\___/\\\\",
 }
 
 
@@ -358,35 +393,61 @@ class GameSession:
         return "\n".join(lines)
 
     def render_animal_row_panel(self) -> str:
-        lines = ["Animal Row", ""]
+        lines = ["Animal Pool", "", "n = select, t = take", ""]
         if not self.state.animal_row:
             lines.append("  none")
             return "\n".join(lines)
 
         for index, card in enumerate(self.state.animal_row):
             marker = ">" if index == self.selected_animal_row_index else " "
-            suffix = " [press t]" if index == self.selected_animal_row_index else ""
-            lines.append(f"{marker} {index}: {card.name} ({card.card_id}){suffix}")
+            suffix = " [take]" if index == self.selected_animal_row_index else ""
+            lines.append(
+                f"{marker} {index}: {card.name:<12} "
+                f"{animal_ascii_icon(card.name):<{ASCII_ICON_WIDTH}} "
+                f"scores {format_score_ladder(card.points_by_cubes_placed)}{suffix}"
+            )
+        selected_card = self.state.animal_row[self.selected_animal_row_index]
+        lines.extend(
+            [
+                "",
+                f"Selected: {selected_card.name} ({selected_card.card_id})",
+                f"  art: {animal_ascii_icon(selected_card.name)}",
+                *render_habitat_pattern(selected_card.habitat, 0),
+            ]
+        )
         return "\n".join(lines)
 
     def render_active_cards_panel(self) -> str:
         preview = self.current_preview()
         displayed_rotation = preview.rotation if preview else "auto"
-        preview_rotation = preview.rotation if preview else 0
-        lines = ["Active Cards", "", f"Rotation: {displayed_rotation}"]
+        preview_rotation = preview.rotation if preview else self.selected_rotation
+        lines = ["Active Cards", "", f"Rotation: {displayed_rotation}", "c = select, r = cycle preview", ""]
         if not self.current_player.active_cards:
             lines.append("  none")
             return "\n".join(lines)
 
         for index, card in enumerate(self.current_player.active_cards):
             marker = ">" if index == self.selected_card_index else " "
-            preview_label = " [preview]" if index == self.selected_card_index else ""
             lines.append(
-                f"{marker} {index}: {card.definition.name} "
-                f"{card.cubes_placed}/{card.definition.cube_count}{preview_label}"
+                f"{marker} {index}: {card.definition.name:<12} "
+                f"{animal_ascii_icon(card.definition.name):<{ASCII_ICON_WIDTH}} "
+                f"cubes {card.cubes_placed}/{card.definition.cube_count}"
             )
             if index == self.selected_card_index:
+                lines.append(f"    scores: {format_score_ladder(card.definition.points_by_cubes_placed)}")
+                if preview is None:
+                    lines.append("    preview: move cursor to a highlighted anchor")
+                else:
+                    lines.append(
+                        "    preview: "
+                        f"anchor {format_coordinate(preview.anchor)} -> "
+                        f"target {format_coordinate(preview.target)} "
+                        f"(rot {preview.rotation})"
+                    )
                 lines.extend(render_habitat_pattern(card.definition.habitat, preview_rotation))
+                lines.append("")
+            else:
+                lines.append(f"    scores: {format_score_ladder(card.definition.points_by_cubes_placed)}")
         return "\n".join(lines)
 
     def render_cursor_panel(self) -> str:
@@ -434,9 +495,9 @@ class GameSession:
             self.render_summary_panel(),
             self.render_offers_panel(),
             self.render_animal_row_panel(),
+            "Board\n\n" + self.render_board_panel(),
             self.render_active_cards_panel(),
             self.render_cursor_panel(),
-            "Board\n\n" + self.render_board_panel(),
             self.render_message_panel(),
         ]
         return "\n\n".join(sections)
@@ -556,6 +617,14 @@ class GameSession:
 
 def format_coordinate(coordinate: Coordinate) -> str:
     return f"{coordinate.q},{coordinate.r}"
+
+
+def animal_ascii_icon(name: str) -> str:
+    return ANIMAL_ASCII_ICONS.get(name, "(o_o)")
+
+
+def format_score_ladder(points_by_cubes_placed: tuple[int, ...]) -> str:
+    return " / ".join(str(score) for score in points_by_cubes_placed[1:])
 
 
 def render_habitat_pattern(pattern: HabitatPattern, rotation: int) -> list[str]:
