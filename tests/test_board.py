@@ -45,7 +45,7 @@ def test_red_must_be_second_token_on_legal_base() -> None:
 
 def test_token_cannot_be_placed_on_space_with_cube() -> None:
     board = build_board().place_token(TerrainColor.FIELD, Coordinate(0, 0))
-    board = board.place_cube(Coordinate(0, 0), "fox:1")
+    board = board.place_cube(Coordinate(0, 0), "fennec:1")
 
     try:
         board.place_token(TerrainColor.FIELD, Coordinate(0, 0))

@@ -86,8 +86,8 @@ def test_loaded_cards_use_recognizable_names() -> None:
     assert all(not card.name.startswith("Base Card") for card in deck)
     assert deck[0].name == "Crocodile"
     assert deck[8].name == "Mouse"
-    assert deck[24].name == "Toucan"
-    assert deck[31].name == "Black Cat"
+    assert deck[24].name == "Condor"
+    assert deck[31].name == "Panther"
 
 
 def test_loaded_base_deck_can_start_a_game() -> None:

@@ -17,10 +17,10 @@ TERRAIN_SYMBOLS = {
 TERRAIN_COLORS = {
     TerrainColor.WATER: "#4fb0c6",
     TerrainColor.MOUNTAIN: "#d4d8dd",
-    TerrainColor.WOOD: "#5d9c59",
+    TerrainColor.WOOD: "#8b5a2b",
     TerrainColor.LEAF: "#8bcf5d",
     TerrainColor.FIELD: "#d9b44a",
-    TerrainColor.BUILDING: "#c67ad9",
+    TerrainColor.BUILDING: "#c85a54",
 }
 
 LEGAL_HIGHLIGHT_BACKGROUND = "#203d29"

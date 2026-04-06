@@ -26,7 +26,7 @@
     },
     {
       "card_id": "base-card-03",
-      "name": "Heron",
+      "name": "Salmon",
       "source_image": "Screenshot 2026-04-04 at 08.49.09.png",
       "scores": [16, 10, 6, 3],
       "target": [0, 0],
@@ -214,7 +214,7 @@
     },
     {
       "card_id": "base-card-16",
-      "name": "Kingfisher",
+      "name": "Parrot",
       "source_image": "Screenshot 2026-04-04 at 08.51.07.png",
       "scores": [14, 9, 4],
       "target": [0, 0],
@@ -226,7 +226,7 @@
     },
     {
       "card_id": "base-card-17",
-      "name": "Wolf",
+      "name": "Wild Boar",
       "source_image": "Screenshot 2026-04-04 at 08.51.12.png",
       "scores": [13, 8, 4],
       "target": [0, 0],
@@ -253,7 +253,7 @@
     },
     {
       "card_id": "base-card-19",
-      "name": "Wild Dog",
+      "name": "Wolf",
       "source_image": "Screenshot 2026-04-04 at 08.51.21.png",
       "scores": [16, 10, 4],
       "target": [0, 0],
@@ -265,7 +265,7 @@
     },
     {
       "card_id": "base-card-20",
-      "name": "Songbirds",
+      "name": "Kingfisher",
       "source_image": "Screenshot 2026-04-04 at 08.51.25.png",
       "scores": [18, 11, 5],
       "target": [0, 0],
@@ -300,7 +300,7 @@
     },
     {
       "card_id": "base-card-23",
-      "name": "Fox",
+      "name": "Fennec",
       "source_image": "Screenshot 2026-04-04 at 08.51.33.png",
       "scores": [16, 9, 4],
       "target": [0, 0],
@@ -312,7 +312,7 @@
     },
     {
       "card_id": "base-card-24",
-      "name": "Polar Bear",
+      "name": "Macaque",
       "source_image": "Screenshot 2026-04-04 at 08.51.36.png",
       "scores": [11, 5],
       "target": [0, 0],
@@ -324,7 +324,7 @@
     },
     {
       "card_id": "base-card-25",
-      "name": "Toucan",
+      "name": "Condor",
       "source_image": "Screenshot 2026-04-04 at 08.51.39.png",
       "scores": [11, 5],
       "target": [0, 0],
@@ -380,7 +380,7 @@
     },
     {
       "card_id": "base-card-29",
-      "name": "Water Bird",
+      "name": "Arctic Fox",
       "source_image": "Screenshot 2026-04-04 at 08.52.01.png",
       "scores": [17, 10, 5],
       "target": [0, 0],
@@ -416,7 +416,7 @@
     },
     {
       "card_id": "base-card-32",
-      "name": "Black Cat",
+      "name": "Panther",
       "source_image": "Screenshot 2026-04-04 at 08.52.15.png",
       "scores": [10, 5],
       "target": [0, 0],
