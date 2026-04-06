@@ -1,6 +1,7 @@
 import asyncio
+from dataclasses import replace
 
-from harmonies.cards import AnimalCardDefinition, HabitatPattern, StackRequirement
+from harmonies.cards import AnimalCardDefinition, AnimalCardState, HabitatPattern, StackRequirement
 from harmonies.game import GameRules
 from harmonies.model import BoardSide, Coordinate, TerrainColor
 from harmonies.ui import GameController, build_board_layout, render_board, render_game_summary
@@ -61,6 +62,25 @@ def build_state():
         bag=bag,
         animal_deck=cards,
     )
+
+
+def build_session_with_active_card(
+    *placements: tuple[TerrainColor, Coordinate],
+    card_id: str = "meerkat",
+) -> GameSession:
+    controller = GameController(build_state())
+    player = controller.state.players[0]
+    board = player.board
+    for color, coordinate in placements:
+        board = board.place_token(color, coordinate)
+    players = list(controller.state.players)
+    players[0] = replace(
+        player,
+        board=board,
+        active_cards=(AnimalCardState(simple_card(card_id)),),
+    )
+    controller.state = replace(controller.state, players=tuple(players))
+    return GameSession(controller)
 
 
 def test_controller_reports_available_offers_and_legal_token_coordinates() -> None:
@@ -222,16 +242,40 @@ def test_session_previews_and_places_animal_cube() -> None:
     controller.place_next_token(Coordinate(1, 0))
     controller.place_next_token(Coordinate(2, 0))
     session = GameSession(controller)
+    session.selected_rotation = 3
 
     preview = session.current_preview()
 
     assert preview is not None
+    assert preview.rotation == 0
     assert preview.target == Coordinate(0, 0)
 
     session.place_at_cursor()
 
     assert session.current_player.board.cell(Coordinate(0, 0)).cube_marker == "card-0:1"
     assert "Placed a cube for Card-0" in session.message
+
+
+def test_session_auto_detects_and_cycles_matching_preview_rotations() -> None:
+    session = build_session_with_active_card(
+        (TerrainColor.MOUNTAIN, Coordinate(0, 0)),
+        (TerrainColor.FIELD, Coordinate(1, 0)),
+        (TerrainColor.FIELD, Coordinate(0, -1)),
+    )
+
+    preview = session.current_preview()
+
+    assert preview is not None
+    assert preview.rotation == 0
+    assert session.board_highlights() == frozenset({Coordinate(0, 0)})
+
+    session.rotate_preview()
+
+    preview = session.current_preview()
+
+    assert preview is not None
+    assert preview.rotation == 4
+    assert "Preview 2/2 (rotation 4)" in session.message
 
 
 def test_active_cards_panel_shows_selected_card_pattern() -> None:

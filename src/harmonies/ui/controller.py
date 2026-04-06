@@ -95,6 +95,17 @@ class GameController:
                     )
         return tuple(placements)
 
+    def legal_animal_placements_for_anchor(
+        self,
+        anchor: Coordinate,
+        card_index: Optional[int] = None,
+    ) -> tuple[AnimalPlacementOption, ...]:
+        return tuple(
+            placement
+            for placement in self.legal_animal_placements(card_index=card_index)
+            if placement.anchor == anchor
+        )
+
     def draft_offer(self, offer_index: int) -> Optional[str]:
         return self._apply(GameRules.draft_offer, offer_index)
 
