@@ -22,7 +22,7 @@ from harmonies.ui.render import (
 
 INITIAL_MESSAGE = (
     "Draft an offer to begin. Move with arrows or hjkl, press d to draft, "
-    "p or Enter to place, t to take an animal card, and r to rotate cube previews."
+    "p or Enter to place, t to take an animal card, and r to cycle cube previews."
 )
 PATTERN_CELL_WIDTH = 5
 PATTERN_SYMBOLS = {
@@ -86,6 +86,7 @@ class GameSession:
             self._move_cursor_vertical(direction)
         elif direction == "down":
             self._move_cursor_vertical(direction)
+        self._sync_selected_rotation_to_cursor()
 
     def cycle_offer(self) -> None:
         indexes = self.available_offer_indexes()
@@ -110,21 +111,24 @@ class GameSession:
             self.message = "You do not have any active animal cards."
             return
         self.selected_card_index = self._next_index(self.selected_card_index, indexes)
+        self._sync_selected_rotation_to_cursor()
         card = self.current_player.active_cards[self.selected_card_index]
         self.message = f"Selected active card {self.selected_card_index}: {card.definition.name}."
 
     def rotate_preview(self) -> None:
         if not self.current_player.active_cards:
-            self.message = "You do not have any active animal cards to rotate."
+            self.message = "You do not have any active animal cards to preview."
             return
-        self.selected_rotation = (self.selected_rotation + 1) % 6
+        placements = self._placements_at_cursor()
+        if not placements:
+            self.message = "No legal animal cube placement matches the cursor."
+            return
+        rotations = tuple(placement.rotation for placement in placements)
+        self.selected_rotation = self._next_index(self.selected_rotation, rotations)
         preview = self.current_preview()
-        if preview is None:
-            self.message = f"Rotation {self.selected_rotation}: no legal cube placement at the cursor."
-            return
         self.message = (
-            f"Rotation {self.selected_rotation}: previewing cube target "
-            f"{format_coordinate(preview.target)}."
+            f"Preview {rotations.index(self.selected_rotation) + 1}/{len(rotations)} "
+            f"(rotation {self.selected_rotation}): target {format_coordinate(preview.target)}."
         )
 
     def draft_selected_offer(self) -> None:
@@ -170,7 +174,7 @@ class GameSession:
 
         preview = self.current_preview()
         if preview is None:
-            self.message = "No legal animal cube placement matches the cursor and selected rotation."
+            self.message = "No legal animal cube placement matches the cursor."
             return
         card_name = self.current_player.active_cards[preview.card_index].definition.name
         error = self.controller.place_animal_cube(preview.card_index, preview.anchor, preview.rotation)
@@ -203,14 +207,13 @@ class GameSession:
         return tuple(index for index, offer in enumerate(self.state.offers) if offer)
 
     def current_preview(self) -> AnimalPlacementOption | None:
-        if not self.current_player.active_cards:
+        placements = self._placements_at_cursor()
+        if not placements:
             return None
-        if self.selected_card_index >= len(self.current_player.active_cards):
-            return None
-        for placement in self.controller.legal_animal_placements(card_index=self.selected_card_index):
-            if placement.anchor == self.cursor and placement.rotation == self.selected_rotation:
+        for placement in placements:
+            if placement.rotation == self.selected_rotation:
                 return placement
-        return None
+        return placements[0]
 
     def board_highlights(self) -> frozenset[Coordinate]:
         if self.state.turn.pending_tokens:
@@ -220,7 +223,6 @@ class GameSession:
         return frozenset(
             placement.anchor
             for placement in self.controller.legal_animal_placements(card_index=self.selected_card_index)
-            if placement.rotation == self.selected_rotation
         )
 
     def render_board_panel(self) -> str:
@@ -346,20 +348,23 @@ class GameSession:
         return "\n".join(lines)
 
     def render_active_cards_panel(self) -> str:
-        lines = ["Active Cards", "", f"Rotation: {self.selected_rotation}"]
+        preview = self.current_preview()
+        displayed_rotation = preview.rotation if preview else "auto"
+        preview_rotation = preview.rotation if preview else 0
+        lines = ["Active Cards", "", f"Rotation: {displayed_rotation}"]
         if not self.current_player.active_cards:
             lines.append("  none")
             return "\n".join(lines)
 
         for index, card in enumerate(self.current_player.active_cards):
             marker = ">" if index == self.selected_card_index else " "
-            preview = " [preview]" if index == self.selected_card_index else ""
+            preview_label = " [preview]" if index == self.selected_card_index else ""
             lines.append(
                 f"{marker} {index}: {card.definition.name} "
-                f"{card.cubes_placed}/{card.definition.cube_count}{preview}"
+                f"{card.cubes_placed}/{card.definition.cube_count}{preview_label}"
             )
             if index == self.selected_card_index:
-                lines.extend(render_habitat_pattern(card.definition.habitat, self.selected_rotation))
+                lines.extend(render_habitat_pattern(card.definition.habitat, preview_rotation))
         return "\n".join(lines)
 
     def render_cursor_panel(self) -> str:
@@ -392,7 +397,7 @@ class GameSession:
                 "Cycle offer: o",
                 "Cycle animal row: n",
                 "Cycle active card: c",
-                "Rotate preview: r",
+                "Cycle cursor preview: r",
                 "Draft offer: d",
                 "Take animal card: t",
                 "Place token or cube: Enter, Space, p",
@@ -466,6 +471,7 @@ class GameSession:
             self.selected_card_index,
             tuple(range(len(self.current_player.active_cards))),
         )
+        self._sync_selected_rotation_to_cursor()
 
     @staticmethod
     def _next_index(current: int, indexes: tuple[int, ...]) -> int:
@@ -506,6 +512,23 @@ class GameSession:
             return
 
         self.cursor = min(candidates)[3]
+
+    def _placements_at_cursor(self) -> tuple[AnimalPlacementOption, ...]:
+        if not self.current_player.active_cards:
+            return ()
+        if self.selected_card_index >= len(self.current_player.active_cards):
+            return ()
+        return self.controller.legal_animal_placements_for_anchor(
+            self.cursor,
+            card_index=self.selected_card_index,
+        )
+
+    def _sync_selected_rotation_to_cursor(self) -> None:
+        placements = self._placements_at_cursor()
+        if placements and all(placement.rotation != self.selected_rotation for placement in placements):
+            self.selected_rotation = placements[0].rotation
+        elif not placements:
+            self.selected_rotation = 0
 
 
 def format_coordinate(coordinate: Coordinate) -> str:
